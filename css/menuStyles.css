@@ -5,9 +5,9 @@
 }
 
 header {
-    background-color: #e8d5c4; 
+    background-color: var(--color-cream); 
     padding: 1rem 2rem;
-    border-bottom: 2px solid #c98866; 
+    border-bottom: 2px solid var(--color-terracotta); 
     margin-bottom: 1rem;
 }
 
@@ -21,7 +21,7 @@ nav ul {
 }
 
 nav a {
-    color: #2e2119; 
+    color: var(--color-brown); 
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 500;
@@ -29,8 +29,8 @@ nav a {
 }
 
 nav a[href="home.html"]:hover {
-    background-color: #c98866; 
-    color: #f5f0eb;
+    background-color: var(--color-terracotta); 
+    color: var(--color-beige);
     transform: scale(1.05);
     border-radius: 25px;
 }
@@ -45,8 +45,8 @@ nav a[href="home.html"]:hover {
 }
 
 nav a[onclick="toggleCarrito()"]:hover {
-    background-color: #c98866; 
-    color: #f5f0eb;
+    background-color: var(--color-terracotta); 
+    color: var(--color-beige);
     transform: scale(1.05);
     border-radius: 25px;
 }
@@ -60,14 +60,14 @@ nav a[onclick="toggleCarrito()"]:hover {
 #search-input {
     padding: 0.8rem 1rem;
     width: 100%;
-    border: 1px solid #c98866; 
+    border: 1px solid var(--color-terracotta); 
     border-radius: 25px;
     font-size: 1rem;
     outline: none;
 }
 
 #search-input:focus {
-    border-color: #3d2817;
+    border-color: var(--color-dark-brown);
 }
 
 .filters-dropdown {
@@ -76,23 +76,23 @@ nav a[onclick="toggleCarrito()"]:hover {
 
 .filters-btn {
     padding: 0.8rem 1.5rem;
-    border: 1px solid #c98866; 
-    background: white;
+    border: 1px solid var(--color-terracotta); 
+    background: var(--color-white);
     border-radius: 25px;
     cursor: pointer;
     font-size: 1rem;
 }
 
 .filters-btn:hover {
-    background: #f5f5f5;
+    background: var(--color-white);
 }
 
 .filter-options {
     position: absolute;
     top: 100%;
     right: 0;
-    background: white;
-    border: 1px solid #c98866; 
+    background: var(--color-white);
+    border: 1px solid var(--color-terracotta); 
     border-radius: 8px;
     padding: 1rem;
     display: none;
@@ -108,17 +108,17 @@ nav a[onclick="toggleCarrito()"]:hover {
 
 .filter-options button {
     padding: 0.5rem 1rem;
-    border: 1px solid #c98866; 
-    background: white;
+    border: 1px solid var(--color-terracotta); 
+    background: var(--color-white);
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .filter-options button.active {
-    background: #c98866; 
-    color: white;
-    border-color: #c98866;
+    background: var(--color-terracotta); 
+    color: var(--color-beige);
+    border-color: var(--color-terracotta);
 }
 
 .dishes-grid {
@@ -131,7 +131,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .dish-card {
-    border: 1px solid #c98866;
+    border: 1px solid var(--color-terracotta);
     border-radius: 8px;
     padding: 1rem;
     text-align: center;
@@ -152,7 +152,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 .price {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #c98866; 
+    color: var(--color-terracotta); 
     display: block;
     margin: 0.5rem 0;
 }
@@ -170,7 +170,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .detalles-content {
-    background-color: white;
+    background-color: var(--color-white);
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 12px;
@@ -191,24 +191,24 @@ nav a[onclick="toggleCarrito()"]:hover {
 #detalles-nombre {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #2e2119; 
+    color: var(--color-brown); 
 }
 
 #detalles-descripcion {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
-    color: #2e2119;
+    color: var(--color-brown);
 }
 
 .texto-precio {
-    color: #2e2119; 
+    color: var(--color-brown); 
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .valor-precio {
-    color: #c98866; 
+    color: var(--color-terracotta); 
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -218,11 +218,11 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-weight: bold;
     text-align: center;
     margin: 1rem 0;
-    color: #2e2119;
+    color: var(--color-brown);
 }
 .precio-total span {
     font-size: 1.5rem;
-    color: #c98866; 
+    color: var(--color-terracotta); 
 }
 
 .selector-cantidad {
@@ -235,8 +235,8 @@ nav a[onclick="toggleCarrito()"]:hover {
 
 .selector-cantidad button {
     padding: 0.8rem 1rem;
-    border: 2px solid #c98866;
-    background: white;
+    border: 2px solid var(--color-terracotta);
+    background: var(--color-white);
     border-radius: 8px;
     cursor: pointer;
     font-size: 1.2rem;
@@ -245,8 +245,8 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .selector-cantidad button:hover {
-    background: #c98866; 
-    color: white;
+    background: var(--color-terracotta); 
+    color: var(--color-white);
 }
 
 #cantidad-input {
@@ -254,7 +254,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     padding: 0.6rem;
     font-size: 1.2rem;
     text-align: center;
-    border: 2px solid #c98866;
+    border: 2px solid var(--color-terracotta);
     border-radius: 8px;
     font-weight: bold;
 }
@@ -262,14 +262,14 @@ nav a[onclick="toggleCarrito()"]:hover {
 .notas-titulo {
     font-weight: bold;
     margin: 1rem 0 0.5rem 0;
-    color: #2e2119; 
+    color: var(--color-brown); 
     font-size: 1rem;
 }
 
 #notas-plato {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #c98866; 
+    border: 2px solid var(--color-terracotta); 
     border-radius: 8px;
     margin-bottom: 1.5rem;
     resize: none;
@@ -286,9 +286,9 @@ nav a[onclick="toggleCarrito()"]:hover {
 .boton-cancelar {
     flex: 1;
     padding: 1rem;
-    background: #e8d5c4; 
-    color: #2e2119; 
-    border: 2px solid #c98866;
+    background: var(--color-cream); 
+    color: var(--color-brown); 
+    border: 2px solid var(--color-terracotta);
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: bold;
@@ -296,14 +296,14 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .boton-cancelar:hover {
-    background: #d4c2b1;
+    background: var(--color-light-terracotta);
 }
 
 .boton-agregar {
     flex: 2;
     padding: 1rem;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -312,7 +312,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .boton-agregar:hover {
-    background: #b57755;
+    background: var(--color-light-terracotta);
 }
 
 .tipo-entrega {
@@ -322,15 +322,15 @@ nav a[onclick="toggleCarrito()"]:hover {
 #tipo-entrega-select {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #c98866; 
+    border: 2px solid var(--color-terracotta); 
     border-radius: 8px;
     font-size: 1rem;
-    background-color: white;
+    background-color: var(--color-white);
     margin-top: 0.5rem;
 }
 
 #tipo-entrega-select:focus {
-    border-color: #3d2817; 
+    border-color: var(--color-dark-brown); 
     outline: none;
 }
 
@@ -347,7 +347,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .carrito-content {
-    background-color: white;
+    background-color: var(--color-white);
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 12px;
@@ -359,7 +359,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 .carrito-content h2 {
     text-align: center;
     margin-bottom: 1rem;
-    color: #2e2119;
+    color: var(--color-dark-brown);
 }
 
 .carrito-item {
@@ -367,7 +367,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-light-gray);
     gap: 1rem;
 }
 
@@ -384,23 +384,23 @@ nav a[onclick="toggleCarrito()"]:hover {
 
 .item-info h4 {
     margin: 0;
-    color: #2e2119; 
+    color: var(--color-brown); 
 }
 
 .item-detalles {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-gray);
     margin: 0.3rem 0;
 }
 
 .item-precio {
     font-weight: bold;
-    color: #c98866;
+    color: var(--color-terracotta);
 }
 
 .btn-eliminar {
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     border: none;
     border-radius: 50%;
     width: 30px;
@@ -415,8 +415,8 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-weight: bold;
     margin: 1rem 0;
     padding: 1rem;
-    border-top: 2px solid #c98866;
-    color: #2e2119; 
+    border-top: 2px solid var(--color-terracotta);
+    color: var(--color-brown); 
 }
 
 .carrito-botones {
@@ -426,7 +426,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 .carrito-content h2 {
     text-align: center;
     margin-bottom: 1rem;
-    color: #2e2119; 
+    color: var(--color-brown); 
 }
 
 .carrito-total {
@@ -435,21 +435,21 @@ nav a[onclick="toggleCarrito()"]:hover {
     text-align: center;
     margin: 1rem 0;
     padding: 1rem;
-    border-top: 2px solid #c98866; 
-    color: #2e2119; 
+    border-top: 2px solid var(--color-terracotta); 
+    color: var(--color-terracotta); 
 }
 
 .carrito-total span {
     font-size: 1.5rem;
-    color: #c98866; 
+    color: var(--color-terracotta); 
 }
 
 
 .boton-principal {
     flex: 1;
     padding: 1rem;
-    background: #c98866; 
-    color: white;
+    background: var(--color-terracotta); 
+    color: var(--color-white);
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -460,9 +460,9 @@ nav a[onclick="toggleCarrito()"]:hover {
 .boton-secundario {
     flex: 1;
     padding: 1rem;
-    background: #e8d5c4;
-    color: #2e2119; 
-    border: 2px solid #c98866; 
+    background: var(--color-cream);
+    color: var(--color-brown); 
+    border: 2px solid var(--color-terracotta); 
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: bold;
@@ -472,7 +472,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 .carrito-vacio {
     text-align: center;
     padding: 2rem;
-    color: #666;
+    color: var(--color-gray);
     font-style: italic;
 }
 
@@ -483,13 +483,13 @@ nav a[onclick="toggleCarrito()"]:hover {
 .notas-generales .notas-titulo {
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: #2e2119; 
+    color: var(--color-brown); 
 }
 
 #notas-generales-pedido {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #c98866; 
+    border: 2px solid var(--color-terracotta); 
     border-radius: 8px;
     resize: none;
     min-height: 60px;
@@ -500,8 +500,8 @@ nav a[onclick="toggleCarrito()"]:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
@@ -509,7 +509,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     transform: translateX(400px);
     transition: transform 0.3s ease;
     max-width: 300px;
-    border: 1px solid #b57755;
+    border: 1px solid var(--color-dark-terracotta);
     font-weight: 500;
 }
 
@@ -518,19 +518,20 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .toast.error {
-    background: #e8d5c4;
-    color: #2e2119; 
-    border: 1px solid #c98866;
+    background: var(--color-toast-error-bg);
+    color: var(--color-toast-error-text);
+    border: 1px solid var(--color-toast-error-border);
 }
 
 .toast.warning {
-    background: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeaa7;
+    background: var(--color-toast-warning-bg);
+    color: var(--color-toast-warning-text);
+    border: 1px solid var(--color-toast-warning-border);
 }
 
 .toast.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: var(--color-toast-success-bg);
+    color: var(--color-toast-success-text);
+    border: 1px solid var(--color-toast-success-border);
 }
+

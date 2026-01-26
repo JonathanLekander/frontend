@@ -5,16 +5,16 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f0eb;
-    color: #2e2119; 
+    font-family: var(--font-main);
+    background-color: var(--color-beige);
+    color: var(--color-brown); 
     line-height: 1.6;
 }
 
 header {
-    background-color: #e8d5c4; 
+    background-color: var(--color-cream); 
     padding: 1rem 2rem;
-    border-bottom: 2px solid #c98866; 
+    border-bottom: 2px solid var(--color-terracotta); 
     margin-bottom: 1rem;
 }
 
@@ -28,7 +28,7 @@ nav ul {
 }
 
 nav a {
-    color: #2e2119; 
+    color: var(--color-brown); 
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 500;
@@ -37,8 +37,8 @@ nav a {
 
 nav a[href="home.html"]:hover,
 nav a[href="menu.html"]:hover {
-    background-color: #c98866; 
-    color: #f5f0eb;
+    background-color: var(--color-terracotta); 
+    color: var(--color-beige);
     transform: scale(1.05);
     border-radius: 25px;
 }
@@ -52,7 +52,7 @@ nav a[href="menu.html"]:hover {
 .comandas-container h1 {
     text-align: center;
     margin-bottom: 2rem;
-    color: #3d2817; 
+    color: var(--color-dark-brown); 
     font-size: 2.5rem;
 }
 
@@ -72,22 +72,22 @@ nav a[href="menu.html"]:hover {
 #search-comanda {
     width: 100%;
     padding: 0.8rem 1rem;
-    border: 1px solid #c98866;
+    border: 1px solid var(--color-terracotta);
     border-radius: 25px;
     font-size: 1rem;
     outline: none;
 }
 
 #search-comanda:focus {
-    border-color: #3d2817; 
+    border-color: var(--color-dark-brown); 
 }
 
 .filters select {
     padding: 0.8rem 1rem;
-    border: 1px solid #c98866;
+    border: 1px solid var(--color-terracotta);
     border-radius: 25px;
     font-size: 1rem;
-    background: white;
+    background: var(--color-white);
     min-width: 200px;
 }
 
@@ -97,11 +97,11 @@ nav a[href="menu.html"]:hover {
 }
 
 .comanda-card {
-    background: white;
+    background:  var(--color-white);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-left: 4px solid #c98866;
+    border-left: 4px solid var(--color-terracotta);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
@@ -121,7 +121,7 @@ nav a[href="menu.html"]:hover {
 .comanda-number {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #3d2817; 
+    color: var(--color-dark-brown); 
 }
 
 .comanda-status {
@@ -131,11 +131,26 @@ nav a[href="menu.html"]:hover {
     font-weight: bold;
 }
 
-.status-1 { background: #fff3cd; color: #856404; }
-.status-2 { background: #cce7ff; color: #004085; }
-.status-3 { background: #d4edda; color: #155724; }
-.status-4 { background: #d1ecf1; color: #0c5460; }
-.status-5 { background: #e2e3e5; color: #383d41; }
+.status-1 {
+     background: var(--color-status-pending-bg); 
+     color: var(--color-status-pending-text); 
+}
+.status-2 { 
+    background: var(--color-status-inprogress-bg); 
+    color: var(--color-status-inprogress-text); 
+}
+.status-3 { 
+    background: var(--color-status-ready-bg); 
+    color: var(--color-status-ready-text); 
+}
+.status-4 { 
+    background: var(--color-status-delivery-bg); 
+    color: var(--color-status-delivery-text); 
+}
+.status-5 {
+    background: var(--color-status-closed-bg); 
+    color: var(--color-status-closed-text); 
+}
 
 .comanda-info-grid {
     display: grid;
@@ -151,23 +166,23 @@ nav a[href="menu.html"]:hover {
 
 .info-label {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-gray);
     margin-bottom: 0.2rem;
 }
 
 .info-value {
     font-weight: bold;
-    color: #2e2119; 
+    color: var(--color-brown); 
 }
 
 .comanda-items-preview {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--color-light-gray);
 }
 
 .items-count {
-    color: #666;
+    color: var(--color-gray);
     font-size: 0.9rem;
 }
 
@@ -175,7 +190,7 @@ nav a[href="menu.html"]:hover {
     display: flex;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-light-gray);
     gap: 1rem;
 }
 
@@ -188,7 +203,7 @@ nav a[href="menu.html"]:hover {
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
-    border: 2px solid #c98866; 
+    border: 2px solid var(--color-terracotta); 
 }
 
 .item-info {
@@ -198,13 +213,13 @@ nav a[href="menu.html"]:hover {
 .item-name {
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: #3d2817; 
+    color: var(--color-dark-brown); 
     font-size: 1.1rem;
 }
 
 .item-details {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-gray);
     line-height: 1.4;
 }
 
@@ -218,13 +233,13 @@ nav a[href="menu.html"]:hover {
 .item-quantity {
     font-weight: bold;
     font-size: 1.1rem;
-    color: #3d2817; 
+    color: var(--color-dark-brown); 
 }
 
 .item-price {
     font-weight: bold;
     font-size: 1.1rem;
-    color: #c98866; 
+    color: var(--color-terracotta); 
 }
 
 .modal {
@@ -240,7 +255,7 @@ nav a[href="menu.html"]:hover {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--color-white);
     margin: 2rem auto;
     padding: 2rem;
     border-radius: 12px;
@@ -257,11 +272,11 @@ nav a[href="menu.html"]:hover {
     top: 1rem;
     font-size: 2rem;
     cursor: pointer;
-    color: #666;
+    color: var(--color-gray);
 }
 
 .close-btn:hover {
-    color: #333;
+    color:  var(--color-dark-gray);
 }
 
 .comanda-info {
@@ -270,7 +285,7 @@ nav a[href="menu.html"]:hover {
     gap: 1rem;
     margin-bottom: 2rem;
     padding: 1rem;
-    background: #f8f9fa;
+    background: var(--color-beige);
     border-radius: 8px;
 }
 
@@ -280,19 +295,19 @@ nav a[href="menu.html"]:hover {
 
 .comanda-items h3 {
     margin-bottom: 1rem;
-    color: #3d2817; 
+    color: var(--color-dark-brown); 
 }
 
 .comanda-notes {
     margin-bottom: 2rem;
     padding: 1rem;
-    background: #f8f9fa;
+    background: var(--color-beige);
     border-radius: 8px;
 }
 
 .comanda-notes h3 {
     margin-bottom: 0.5rem;
-    color: #3d2817;
+    color: var(--color-dark-brown);
 }
 
 .modal-buttons {
@@ -304,8 +319,8 @@ nav a[href="menu.html"]:hover {
 
 .btn-principal {
     padding: 1rem 2rem;
-    background: #c98866; 
-    color: white;
+    background: var(--color-terracotta); 
+    color: var(--color-white);
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -314,14 +329,14 @@ nav a[href="menu.html"]:hover {
 }
 
 .btn-principal:hover {
-    background: #b57755;
+    background: var(--color-dark-terracotta);
 }
 
 .btn-secundario {
     padding: 1rem 2rem;
-    background: #e8d5c4;
-    color: #2e2119; 
-    border: 2px solid #c98866; 
+    background: var(--color-cream);
+    color: var(--color-brown); 
+    border: 2px solid  var(--color-terracotta); 
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: bold;
@@ -329,25 +344,25 @@ nav a[href="menu.html"]:hover {
 }
 
 .btn-secundario:hover {
-    background: #d4c2b1;
+    background: var(--color-light-terracotta);
 }
 
 .loading {
     text-align: center;
     padding: 2rem;
-    color: #666;
+    color: var(--color-gray);
     font-style: italic;
 }
 
 .empty-state {
     text-align: center;
     padding: 3rem;
-    color: #666;
+    color: var(--color-gray);
 }
 
 .empty-state h3 {
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--color-dark-gray);
 }
 
 .error {
@@ -397,15 +412,15 @@ nav a[href="menu.html"]:hover {
 
 .estado-plato {
     padding: 0.3rem 0.5rem;
-    border: 1px solid #c98866; 
+    border: 1px solid var(--color-terracotta); 
     border-radius: 4px;
     font-size: 0.9rem;
-    background: white;
+    background: var(--color-white);
     cursor: pointer;
 }
 
 .estado-plato:focus {
-    border-color: #3d2817; 
+    border-color: var(--color-dark-brown); 
     outline: none;
 }
 
@@ -413,8 +428,8 @@ nav a[href="menu.html"]:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
@@ -422,7 +437,7 @@ nav a[href="menu.html"]:hover {
     transform: translateX(400px);
     transition: transform 0.3s ease;
     max-width: 300px;
-    border: 1px solid #b57755;
+    border: 1px solid var(--color-dark-terracotta);
     font-weight: 500;
 }
 
@@ -431,7 +446,7 @@ nav a[href="menu.html"]:hover {
 }
 
 .toast.error {
-    background: #e8d5c4;
-    color: #2e2119;
-    border: 1px solid #c98866;
+    background: var(--color-toast-error-bg);
+    color: var(--color-toast-error-text);
+    border: 1px solid var(--color-toast-error-border);
 }

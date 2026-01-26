@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - LekEat</title>
+    <link rel="stylesheet" href="../css/panel-control.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Inicio</a></li>
+                <li><strong>Panel de Control</strong></li>
+                <li></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="controls-container">
+            <form class="search-box">
+                <input type="text" id="search-comanda" placeholder="Buscar comanda...">
+            </form>
+        </section>
+
+        <section id="comandas-container" class="comandas-grid"></section>
+         
+        <section id="modal-estado" class="modal-detalles">
+            <article class="detalles-content">
+                <h2>Cambiar Estado del Plato</h2>
+                
+                <div class="item-info">
+                    <h3 id="modal-item-nombre"></h3>
+                    <p><strong>Comanda #</strong><span id="modal-comanda-numero"></span></p>
+                    <p><strong>Notas:</strong> <span id="modal-item-notas"></span></p>
+                    <p><strong>Estado actual:</strong> <span id="modal-estado-actual"></span></p>
+                </div>
+
+                <div class="selector-estado">
+                    <label for="estado-select"><strong>Nuevo estado:</strong></label>
+                    <select id="estado-select">
+                        <option value="1">Pending</option>
+                        <option value="2">In Progress</option>
+                        <option value="3">Ready</option>
+                        <option value="4">Delivery</option>
+                        <option value="5">Closed</option>
+                    </select>
+                </div>
+
+                <div class="botones-finales">
+                    <button class="boton-cancelar" onclick="cerrarModalEstado()">CANCELAR</button>
+                    <button class="boton-agregar" onclick="actualizarEstado()">ACTUALIZAR ESTADO</button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/panel-control.js"></script>
+</body>
+</html>

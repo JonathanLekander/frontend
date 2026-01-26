@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - LekEat</title>
+    <link rel="stylesheet" href="../css/menuStyles.css">
+</head>
+<body>
+    <header>
+        <nav>
+        <ul>
+            <li><a href="home.html">Inicio</a></li>
+            <li><a><strong> Menu</strong></a></li>
+            <li><a onclick="toggleCarrito()">Carrito</a></li>
+        </ul>
+        </nav>
+    </header>
+
+   <main>
+        <section class="controls-container">
+        <form class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar platos...">
+        </form>
+       
+        <nav class="filters-dropdown">
+                <button class="filters-btn"> Filtros</button>
+            <menu id="filter-buttons" class="filter-options"></menu>
+        </nav>
+        </section>
+    
+        
+        <section id="menu-container" class="dishes-grid"></section>
+
+        <section id="dish-detalles" class="modal-detalles">
+            <article class="detalles-content">
+                <img id="detalles-imagen" src="" alt="">
+                <h2 id="detalles-nombre"></h2>
+                <p id="detalles-descripcion"></p>
+                <div class="precio">
+                    <span class="texto-precio">Precio: </span>
+                    <span class="valor-precio" id="detalles-precio"></span>
+                </div>
+
+                <div class="tipo-entrega">
+                    <p class="notas-titulo">Tipo de entrega</p>
+                    <select id="tipo-entrega-select">
+                        <option value="">Seleccionar tipo de entrega</option>
+                    </select>
+                </div>
+            
+                <section class="selector-cantidad">
+                    <button onclick="disminuirCantidad()">-</button>
+                    <input type="number" id="cantidad-input" min="1" value="1" onchange="actualizarPrecioTotal()">
+                    <button onclick="aumentarCantidad()">+</button>
+                </section>
+            
+                <div class="precio-total">
+                    Total: <span>$<span id="precio-total">0</span></span>
+                </div>
+            
+                <p class="notas-titulo">Notas especiales (opcional)</p>
+                <textarea id="notas-plato" placeholder="Ej: Sin sal, bien cocido, etc..."></textarea>
+            
+                <div class="botones-finales">
+                    <button class="boton-cancelar" onclick="cerrarDetalles()">CANCELAR</button>
+                    <button class="boton-agregar" onclick="agregarAlCarrito()">AGREGAR AL CARRITO</button>
+                </div>
+            </article>
+        </section>
+
+        <section id="carrito-modal" class="modal-carrito">
+            <div class="carrito-content">
+                <h2>Tu Pedido</h2>
+                <div id="carrito-items"></div>
+        
+                <div class="notas-generales">
+                <p class="notas-titulo">Notas generales del pedido (opcional)</p>
+                <textarea id="notas-generales-pedido" placeholder="Ej: Timbre: 5B, Sin contacto, etc..."></textarea>
+                </div>
+
+                <div class="carrito-total">
+                    Total: <span>$<span id="carrito-total">0</span></span>
+                </div>
+                
+                <div class="carrito-botones">
+                    <button onclick="cerrarCarrito()" class="boton-secundario">Seguir Comprando</button>
+                    <button class="boton-principal btn-confirmar-pedido">Confirmar Pedido</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="toast-notification" class="toast"></div>
+    
+    <script src="../js/menu.js"></script>
+
+</body>
+</html>

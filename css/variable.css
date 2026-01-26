@@ -33,8 +33,7 @@
     --color-status-closed-bg: #e2e3e5;
     --color-status-closed-text: #383d41;
 
-    /*toast*/
-    /* Toast colors */
+     /* Toast colors */
     --color-toast-warning-bg: var(--color-beige);
     --color-toast-warning-text: #856404;
     --color-toast-warning-border: #ffeaa7;

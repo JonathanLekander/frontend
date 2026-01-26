@@ -13,7 +13,7 @@
         <ul>
             <li><a href="home.html">Inicio</a></li>
             <li><a><strong> Menu</strong></a></li>
-            <li><a onclick="toggleCarrito()">Carrito</a></li>
+            <li><a class ="btn-carrito">Carrito</a></li>
         </ul>
         </nav>
     </header>
@@ -51,9 +51,9 @@
                 </div>
             
                 <section class="selector-cantidad">
-                    <button onclick="disminuirCantidad()">-</button>
-                    <input type="number" id="cantidad-input" min="1" value="1" onchange="actualizarPrecioTotal()">
-                    <button onclick="aumentarCantidad()">+</button>
+                    <button class="btn-disminuir">-</button>
+                    <input type="number" id="cantidad-input" min="1" value="1">
+                    <button class="btn-aumentar">+</button>
                 </section>
             
                 <div class="precio-total">
@@ -64,8 +64,8 @@
                 <textarea id="notas-plato" placeholder="Ej: Sin sal, bien cocido, etc..."></textarea>
             
                 <div class="botones-finales">
-                    <button class="boton-cancelar" onclick="cerrarDetalles()">CANCELAR</button>
-                    <button class="boton-agregar" onclick="agregarAlCarrito()">AGREGAR AL CARRITO</button>
+                    <button class="boton-cancelar btn-cerrar-detalles">CANCELAR</button>
+                    <button class="boton-agregar btn-agregar-carrito">AGREGAR AL CARRITO</button>
                 </div>
             </article>
         </section>
@@ -85,7 +85,7 @@
                 </div>
                 
                 <div class="carrito-botones">
-                    <button onclick="cerrarCarrito()" class="boton-secundario">Seguir Comprando</button>
+                    <button class="boton-secundario btn-cerrar-carrito">Seguir Comprando</button>
                     <button class="boton-principal btn-confirmar-pedido">Confirmar Pedido</button>
                 </div>
             </div>

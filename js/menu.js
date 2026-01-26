@@ -77,6 +77,13 @@ function DeliveryTypes() {
         select.appendChild(option);
     });
 }
+    function bindDishEvents() {
+        document.querySelectorAll('.dish-img').forEach(img => {
+            img.addEventListener('click', () => {
+                abrirDetalles(img.dataset.id);
+            });
+        });
+    }
 
 function displayDishes(dishes) {
     const menuContainer = document.getElementById('menu-container');
@@ -100,8 +107,7 @@ function displayDishes(dishes) {
     platosDisponibles.forEach(dish => {
         const dishCard = `
             <div class="dish-card" data-category="${dish.category.id}">
-                <img src="${dish.image}" alt="${dish.name}" 
-                     onclick="abrirDetalles('${dish.id}')" style="cursor: pointer;">
+                <img   src="${dish.image}" class="dish-img" data-id="${dish.id}" style="cursor:pointer"">
                 <h3>${dish.name}</h3>
                 <p>${dish.description.substring(0, 100)}...</p>
                 <span class="price">$${dish.price}</span>
@@ -109,6 +115,7 @@ function displayDishes(dishes) {
         `;
         menuContainer.innerHTML += dishCard;
     });
+    bindDishEvents();
 }
 
 function createFilterButtons(categories) {
@@ -264,10 +271,6 @@ function agregarAlCarrito() {
     mostrarToast(`${platoActual.name} agregado al carrito`, 'success');
 }
 
-document.getElementById('cantidad-input').addEventListener('input', function() {
-    if (this.value < 1) this.value = 1;
-    actualizarPrecioTotal();
-});
 
 function toggleCarrito() {
     const modal = document.getElementById('carrito-modal');
@@ -279,43 +282,52 @@ function cerrarCarrito() {
     document.getElementById('carrito-modal').style.display = 'none';
 }
 
+function bindCarritoEvents() {
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            eliminarItem(parseInt(btn.dataset.index));
+        });
+    });
+}
+
 function actualizarCarritoUI() {
     const carritoItems = document.getElementById('carrito-items');
     const carritoTotal = document.getElementById('carrito-total');
     const notasTextarea = document.getElementById('notas-generales-pedido');
-    
+    const btnConfirmar = document.querySelector('.btn-confirmar-pedido');
+    const comandaActiva = sessionStorage.getItem('comandaActiva');
+
     if (carrito.length === 0) {
         carritoItems.innerHTML = '<p class="carrito-vacio">El carrito está vacío</p>';
         carritoTotal.textContent = '0';
-        if (notasTextarea) notasTextarea.placeholder = 'Notas generales del pedido...'; 
-        
-        const btnConfirmar = document.querySelector('.btn-confirmar-pedido');
-        if (btnConfirmar) {
-            const comandaActiva = sessionStorage.getItem('comandaActiva');
-            if (comandaActiva) {
-                btnConfirmar.textContent = `Agregar a Comanda #${comandaActiva}`;
-                btnConfirmar.onclick = actualizarOrden;
-                btnConfirmar.disabled = true;
-            } else {
-                btnConfirmar.textContent = 'Confirmar Pedido';
-                btnConfirmar.onclick = crearOrden;
-                btnConfirmar.disabled = true; 
-            }
+
+        if (notasTextarea) {
+            notasTextarea.value = '';
+            notasTextarea.placeholder = 'Notas generales del pedido...';
         }
+
+        if (comandaActiva) {
+            btnConfirmar.textContent = `Agregar a Comanda #${comandaActiva}`;
+        } else {
+            btnConfirmar.textContent = 'Confirmar Pedido';
+        }
+
+        btnConfirmar.disabled = true;
         return;
     }
-    
+
     if (notasTextarea) {
-        const tipoEntrega = carrito[0].tipoEntregaId;
-        if (tipoEntrega === 1) {
-            notasTextarea.placeholder = 'Ej: Av. Corrientes 1234, Piso 5 Depto B, Timbre: 5B...';
-        } else if (tipoEntrega === 2) {
-            notasTextarea.placeholder = 'Ej: Nombre: María González, Hora de retiro: 20:30...';
+        const tipo = carrito[0].tipoEntregaId;
+
+        if (tipo === 1) {
+            notasTextarea.placeholder = 'Ej: Av. Corrientes 1234, Piso 5 Depto B...';
+        } else if (tipo === 2) {
+            notasTextarea.placeholder = 'Ej: Nombre y hora de retiro...';
         } else {
-            notasTextarea.placeholder = 'Ej: Mesa 4, Comedor principal, Zona fumadores...';
+            notasTextarea.placeholder = 'Ej: Mesa 4, salón principal...';
         }
     }
-    
+
     carritoItems.innerHTML = carrito.map((item, index) => `
         <div class="carrito-item">
             <img src="${item.imagen}" alt="${item.nombre}">
@@ -327,27 +339,26 @@ function actualizarCarritoUI() {
                 </div>
                 <div class="item-precio">$${item.precio} c/u</div>
             </div>
-            <button onclick="eliminarItem(${index})" class="btn-eliminar">×</button>
+            <button class="btn-eliminar" data-index="${index}">×</button>
         </div>
     `).join('');
-    
-    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+
+
+    let total = 0;
+    carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+    });
     carritoTotal.textContent = total.toFixed(2);
-    
-    const btnConfirmar = document.querySelector('.btn-confirmar-pedido');
-    if (btnConfirmar) {
-        const comandaActiva = sessionStorage.getItem('comandaActiva');
-        
-        if (comandaActiva) {
-            btnConfirmar.textContent = `Agregar a Comanda #${comandaActiva}`;
-            btnConfirmar.onclick = actualizarOrden;
-            btnConfirmar.disabled = false;
-        } else {
-            btnConfirmar.textContent = 'Confirmar Pedido';
-            btnConfirmar.onclick = crearOrden;
-            btnConfirmar.disabled = false; 
-        }
+
+    if (comandaActiva) {
+        btnConfirmar.textContent = `Agregar a Comanda #${comandaActiva}`;
+    } else {
+        btnConfirmar.textContent = 'Confirmar Pedido';
     }
+
+    btnConfirmar.disabled = false;
+
+    bindCarritoEvents();
 }
 
 function eliminarItem(index) {
@@ -443,16 +454,55 @@ async function crearOrden() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+    initData();
+    initEvents();
+    initCarrito();
+});
+
+function initData() {
     loadDishes();
     loadCategories();
     loadDeliveryTypes();
     setupSearch();
+}
 
+function initEvents() {
+    document.querySelector('.btn-carrito')
+        ?.addEventListener('click', toggleCarrito);
+    document.querySelector('.btn-aumentar')
+        ?.addEventListener('click', aumentarCantidad);
+    document.querySelector('.btn-disminuir')
+        ?.addEventListener('click', disminuirCantidad);
+    document.querySelector('.btn-cerrar-detalles')
+        ?.addEventListener('click', cerrarDetalles);
+    document.querySelector('.btn-agregar-carrito')
+        ?.addEventListener('click', agregarAlCarrito);
+    document.querySelector('.btn-cerrar-carrito')
+        ?.addEventListener('click', cerrarCarrito);
+    const cantidadInput = document.getElementById('cantidad-input');
+    cantidadInput?.addEventListener('input', () => {
+        if (cantidadInput.value < 1) cantidadInput.value = 1;
+        actualizarPrecioTotal();
+    });
+    const btnConfirmar = document.querySelector('.btn-confirmar-pedido');
+    if (btnConfirmar) {
+        btnConfirmar.addEventListener('click', () => {
+            const comandaActiva = sessionStorage.getItem('comandaActiva');
+
+            if (comandaActiva) {
+                actualizarOrden();
+            } else {
+                crearOrden();
+            }
+        });
+    }
+}
+
+function initCarrito() {
     const carritoGuardado = localStorage.getItem('carrito');
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
     }
-
     actualizarCarritoUI();
-});
+}

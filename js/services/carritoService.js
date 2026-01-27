@@ -1,34 +1,33 @@
-let carrito = [];
+const KEY = "carrito";
 
-export function cargarCarrito() {
-    const guardado = localStorage.getItem('carrito');
-    carrito = guardado ? JSON.parse(guardado) : [];
+let carrito = JSON.parse(localStorage.getItem(KEY)) || [];
+
+function save() {
+    localStorage.setItem(KEY, JSON.stringify(carrito));
+}
+
+export function getItems() {
     return carrito;
 }
 
-export function obtenerCarrito() {
-    return carrito;
-}
-
-export function agregarItem(item) {
+export function addItem(item) {
     carrito.push(item);
-    guardar();
+    save();
 }
 
-export function eliminarItem(index) {
+export function removeItem(index) {
     carrito.splice(index, 1);
-    guardar();
+    save();
 }
 
-export function vaciarCarrito() {
+export function clear() {
     carrito = [];
-    guardar();
+    localStorage.removeItem(KEY);
 }
 
-export function calcularTotal() {
-    return carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
-}
-
-function guardar() {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+export function getTotal() {
+    return carrito.reduce(
+        (acc, i) => acc + i.precio * i.cantidad,
+        0
+    );
 }

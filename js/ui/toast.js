@@ -1,6 +1,16 @@
+let toastTimeout;
+
 export function mostrarToast(mensaje, tipo = "success") {
     const toast = document.getElementById("toast-notification");
+    if (!toast) return;
+
+    // Cancelar cualquier toast pendiente
+    if (toastTimeout) clearTimeout(toastTimeout);
+
     toast.textContent = mensaje;
     toast.className = `toast show ${tipo}`;
-    setTimeout(() => toast.className = "toast", 3000);
+
+    toastTimeout = setTimeout(() => {
+        toast.className = "toast";
+    }, 3000);
 }

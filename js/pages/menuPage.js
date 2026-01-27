@@ -1,15 +1,15 @@
 import { getDishes } from "../api/dishApi.js";
 import { getCategories } from "../api/categoryApi.js";
 import { getDeliveryTypes } from "../api/deliveryApi.js";
-import { renderDishes, renderCategories,  renderCarrito, renderDeliveryTypes } from "../ui/render.js";
-import { addItem, getItems, removeItem } from "../services/carritoService.js";
+import { renderDishes, renderCategories, renderCarrito, renderDeliveryTypes } from "../ui/render.js";
+import { addItem, getItems, removeItem, clear } from "../services/carritoService.js";
 import { openModal, closeModal } from "../ui/modal.js";
 import { mostrarToast } from "../ui/toast.js";
+import { createOrder } from "../api/orderApi.js";
 
 let platos = [];
 let platoActual = null;
 let cantidad = 1;
-
 let textoBusqueda = "";
 let categoriaActiva = "all";
 
@@ -52,6 +52,7 @@ function filterDishes(e) {
 
     document.querySelectorAll(".filter-btn")
         .forEach(b => b.classList.remove("active"));
+
     e.target.classList.add("active");
 
     aplicarFiltros();
@@ -59,11 +60,8 @@ function filterDishes(e) {
 
 function aplicarFiltros() {
     const filtrados = platos.filter(p => {
-        const matchTexto =  p.name.toLowerCase().includes(textoBusqueda);
-        const matchCategoria =
-            categoriaActiva === "all" ||
-            p.category.id === Number(categoriaActiva);
-
+        const matchTexto = p.name.toLowerCase().includes(textoBusqueda);
+        const matchCategoria = categoriaActiva === "all" || p.category.id == categoriaActiva;
         return matchTexto && matchCategoria;
     });
 
@@ -82,7 +80,6 @@ function selectDish(dish) {
     document.getElementById("precio-total").textContent = dish.price.toFixed(2);
     document.getElementById("tipo-entrega-select").value = "";
     document.querySelector(".btn-agregar-carrito").onclick = agregarAlCarrito;
-
     openModal("dish-detalles");
 }
 
@@ -109,6 +106,7 @@ function agregarAlCarrito() {
     if (!platoActual) return;
 
     const tipoEntrega = document.getElementById("tipo-entrega-select").value;
+
     if (!tipoEntrega) {
         mostrarToast("Seleccioná un tipo de entrega", "error");
         return;
@@ -120,7 +118,7 @@ function agregarAlCarrito() {
         precio: platoActual.price,
         cantidad,
         imagen: platoActual.image,
-        tipoEntregaId: Number(tipoEntrega)
+        tipoEntregaId: tipoEntrega
     });
 
     closeModal("dish-detalles");
@@ -128,6 +126,47 @@ function agregarAlCarrito() {
     mostrarToast("Agregado al carrito", "success");
 }
 
+async function confirmarPedido() {
+    const carrito = getItems();
+
+    if (!carrito.length) {
+        mostrarToast("El carrito está vacío", "error");
+        return;
+    }
+
+    const notasGenerales = document.getElementById("notas-generales-pedido")?.value || "";
+    const orden = {
+        items: carrito.map(item => ({
+            id: item.dishId,
+            quantity: item.cantidad,
+            notes: item.notas || ""
+        })),
+        delivery: { 
+            id: carrito[0].tipoEntregaId,
+            to: document.getElementById("tipo-entrega-select").selectedOptions[0].text
+        },
+        notes: notasGenerales
+    };
+
+    console.log("ORDEN ENVIADA:", orden);
+
+    try {
+        const res = await createOrder(orden);
+        console.log("Respuesta backend:", res);
+
+        mostrarToast("Pedido confirmado", "success");
+
+        clear();
+        renderCarrito(getItems());
+
+        document.getElementById("notas-generales-pedido").value = "";
+        document.getElementById("carrito-modal").style.display = "none";
+
+    } catch (err) {
+        console.error("Error confirmando pedido:", err);
+        mostrarToast("Error al confirmar el pedido", "error");
+    }
+}
 
 function bindEvents() {
     document.querySelector(".btn-aumentar")
@@ -157,5 +196,9 @@ function bindEvents() {
 
     document.querySelector(".btn-cerrar-carrito")
         ?.addEventListener("click", () => {
-            document.getElementById("carrito-modal").style.display = "none";});
+            document.getElementById("carrito-modal").style.display = "none";
+        });
+
+    document.querySelector(".btn-confirmar-pedido")
+        ?.addEventListener("click", confirmarPedido);
 }

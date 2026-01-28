@@ -37,5 +37,4 @@ Estructura que quiero obtener:
  │   ├── menuPage.js         // lógica SOLO del menú
  │   ├── comandaPage.js      // lista y detalle de comandas
  │   └── pControlPage.js// cocina / control estados
- │
- └── main.js                  // inicialización general (opcional)
+ 

@@ -1,3 +1,5 @@
+import { formatearFecha } from '../utils/fecha.js';
+
 export function renderDishes(platos, onSelect) {
     console.log("Render platos:", platos);
 
@@ -95,4 +97,83 @@ export function renderCarrito(carrito) {
     totalEl.textContent = total.toFixed(2);
 }
 
+/*===========================================*/
 
+// /js/ui/render.js (añadir estas funciones)
+
+export function renderComandas(comandas, onVerDetalles) {
+    return comandas.map(c => `
+        <div class="comanda-card" data-order-id="${c.orderNumber}">
+            <div class="comanda-header">
+                <span class="comanda-number">Comanda #${c.orderNumber}</span>
+                <span class="comanda-status status-${c.status?.id || 1}">
+                    ${c.status?.name || 'Pendiente'}
+                </span>
+            </div>
+            <div class="comanda-info-grid">
+                <div class="info-item">
+                    <span class="info-label">Total</span>
+                    <span class="info-value">$${c.totalAmount || 0}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Items</span>
+                    <span class="info-value">${c.items?.length || 0}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Entrega</span>
+                    <span class="info-value">${c.deliveryType?.name || 'No especificado'}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha</span>
+                    <span class="info-value">${formatearFecha(c.createdAt)}</span>
+                </div>
+            </div>
+            <div class="comanda-items-preview">
+                <span class="items-count">${c.items?.length || 0} items</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
+    document.getElementById('comanda-numero').textContent = comanda.orderNumber;
+    document.getElementById('comanda-estado').textContent = comanda.status?.name || 'Pendiente';
+    document.getElementById('comanda-total').textContent = `$${comanda.totalAmount || 0}`;
+    document.getElementById('comanda-fecha').textContent = formatearFecha(comanda.createdAt);
+    document.getElementById('comanda-entrega').textContent = comanda.deliveryType?.name || 'No especificado';
+    document.getElementById('comanda-notas').textContent = comanda.notes || 'Sin notas';
+    
+    const itemsContainer = document.getElementById('comanda-items');
+    
+    if (comanda.items && comanda.items.length > 0) {
+        itemsContainer.innerHTML = comanda.items.map(item => {
+            const cantidad = item.quantity || 1;
+            const precioUnitario = obtenerPrecioUnitario(item);
+            const subtotal = precioUnitario * cantidad;
+            
+            return `
+                <div class="item-detalle">
+                    <div class="item-imagen">
+                        <img src="${item.dish?.image || 'https://via.placeholder.com/80x80/2c5530/ffffff?text=Plato'}" 
+                             alt="${item.dish?.name || 'Plato'}" 
+                             onerror="this.src='https://via.placeholder.com/80x80/2c5530/ffffff?text=Plato'">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-name">${item.dish?.name || 'Plato no disponible'}</div>
+                        <div class="item-details">
+                            <span><strong>Precio unitario:</strong> $${precioUnitario.toFixed(2)}</span>
+                            ${item.notes ? `<br><span><strong>Notas del plato:</strong> ${item.notes}</span>` : ''}
+                            <br><span><strong>Estado:</strong> ${item.status?.name || 'Pendiente'}</span>
+                        </div>
+                    </div>
+                    <div class="item-cantidad">
+                        <span class="item-quantity">x${cantidad}</span>
+                        <span class="item-price">$${subtotal.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } else {
+        itemsContainer.innerHTML = '<p>No hay items en esta comanda</p>';
+    }
+}

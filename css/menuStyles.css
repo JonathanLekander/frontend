@@ -34,6 +34,19 @@ nav a[href="home.html"]:hover {
     transform: scale(1.05);
     border-radius: 25px;
 }
+.nav-inicio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-inicio i {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+
+
 
 .controls-container {
     display: flex;
@@ -55,6 +68,9 @@ nav a[onclick="toggleCarrito()"]:hover {
 .search-box {
     flex: 1;
     max-width: 400px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 #search-input {
@@ -64,6 +80,17 @@ nav a[onclick="toggleCarrito()"]:hover {
     border-radius: 25px;
     font-size: 1rem;
     outline: none;
+}
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#search-input {
+    padding-left: 32px;
 }
 
 #search-input:focus {
@@ -234,7 +261,8 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .selector-cantidad button {
-    padding: 0.8rem 1rem;
+    height: 50px;
+    padding: 0;
     border: 2px solid var(--color-terracotta);
     background: var(--color-white);
     border-radius: 8px;
@@ -250,7 +278,8 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 #cantidad-input {
-    width: 80px;
+    width: 65px;
+    height: 50px;
     padding: 0.6rem;
     font-size: 1.2rem;
     text-align: center;
@@ -277,47 +306,58 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-size: 0.9rem;
 }
 
-.botones-finales {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.boton-cancelar {
-    flex: 1;
-    padding: 1rem;
-    background: var(--color-cream); 
-    color: var(--color-brown); 
-    border: 2px solid var(--color-terracotta);
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .boton-cancelar:hover {
     background: var(--color-light-terracotta);
 }
 
-.boton-agregar {
-    flex: 2;
-    padding: 1rem;
-    background: var(--color-terracotta);
-    color: var(--color-white);
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
 
 .boton-agregar:hover {
     background: var(--color-light-terracotta);
 }
 
-.tipo-entrega {
-    margin: 1rem 0;
+.boton-cancelar,
+.boton-agregar {
+    width: 165px;
+    height: 46px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
 }
+
+.boton-cancelar {
+    background: var(--color-cream);
+    color: var(--color-brown);
+    border: 2px solid var(--color-terracotta);
+}
+
+.boton-agregar {
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+}
+
+.botones-finales {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+}
+
+.tipo-entrega {
+    margin-top: 1rem;
+}
+
+.tipo-entrega .notas-titulo {
+    padding-left: 0.25rem;
+}
+
 
 #tipo-entrega-select {
     width: 100%;
@@ -409,14 +449,30 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-size: 0.8rem;
 }
 
-.carrito-total {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 1rem 0;
-    padding: 1rem;
-    border-top: 2px solid var(--color-terracotta);
-    color: var(--color-brown); 
+.carrito-botones .boton-principal,
+.carrito-botones .boton-secundario {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    height: 45px;
+}
+
+.btn-carrito {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-carrito i {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+
+.btn-carrito:hover {
+    background-color: var(--color-terracotta);
+    color: var(--color-beige);
+    transform: scale(1.05);
+    border-radius: 25px;
 }
 
 .carrito-botones {
@@ -500,6 +556,8 @@ nav a[onclick="toggleCarrito()"]:hover {
     position: fixed;
     top: 20px;
     right: 20px;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
@@ -507,22 +565,14 @@ nav a[onclick="toggleCarrito()"]:hover {
     transform: translateX(400px);
     transition: transform 0.3s ease;
     max-width: 300px;
+    border: 1px solid var(--color-dark-terracotta);
     font-weight: 500;
-
-    background: none; /* quitar color base */
-    border: none;
-    color: inherit;
 }
+
 
 
 .toast.show {
     transform: translateX(0);
-}
-
-.toast.success {
-    background: var(--color-toast-success-bg);
-    color: var(--color-toast-success-text);
-    border: 1px solid var(--color-toast-success-border);
 }
 
 .toast.error {
@@ -535,5 +585,11 @@ nav a[onclick="toggleCarrito()"]:hover {
     background: var(--color-toast-warning-bg);
     color: var(--color-toast-warning-text);
     border: 1px solid var(--color-toast-warning-border);
+}
+
+.toast.success {
+    background: var(--color-toast-success-bg);
+    color: var(--color-toast-success-text);
+    border: 1px solid var(--color-toast-success-border);
 }
 

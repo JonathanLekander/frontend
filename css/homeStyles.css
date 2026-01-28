@@ -18,6 +18,14 @@ header {
     border-bottom: 2px solid var(--color-terracotta);
     margin-bottom: 1rem;
 }
+header nav a {
+    height: 44px;
+    padding: 0 1.2rem;     /* solo horizontal */
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    gap: 0.5rem;
+}
 
 nav ul {
     list-style: none;
@@ -41,8 +49,8 @@ nav a[href="menu.html"]:hover,
 nav a[href="panel-control.html"]:hover {
     background-color: var(--color-terracotta); 
     color: var(--color-beige);
-    transform: scale(1.05);
     border-radius: 25px;
+    transform: translateY(-1px);
 }
 
 .logo-img {
@@ -205,3 +213,4 @@ nav a[href="comanda.html"]:hover {
     border-radius: 25px;
     padding: 1rem 1rem; 
 }
+

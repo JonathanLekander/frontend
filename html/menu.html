@@ -6,14 +6,16 @@
     <title>Menu - LekEat</title>
     <link rel="stylesheet" href="../css/variable.css">
     <link rel="stylesheet" href="../css/menuStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
     <header>
         <nav>
         <ul>
-            <li><a href="home.html">Inicio</a></li>
+            <li><a href="home.html" class="nav-inicio"><i class="fa-solid fa-house"></i>Inicio</a></li>
             <li><a><strong> Menu</strong></a></li>
-            <li><a class ="btn-carrito">Carrito</a></li>
+            <li><a class ="btn-carrito"> <i class="fa-solid fa-cart-shopping"></i> Carrito</a></li>
         </ul>
         </nav>
     </header>
@@ -21,6 +23,7 @@
    <main>
         <section class="controls-container">
         <form class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="search-input" placeholder="Buscar platos...">
         </form>
        
@@ -65,7 +68,10 @@
             
                 <div class="botones-finales">
                     <button class="boton-cancelar btn-cerrar-detalles">CANCELAR</button>
-                    <button class="boton-agregar btn-agregar-carrito">AGREGAR AL CARRITO</button>
+                    <button class="boton-agregar btn-agregar-carrito">
+                        <span>Agregar</span>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
                 </div>
             </article>
         </section>

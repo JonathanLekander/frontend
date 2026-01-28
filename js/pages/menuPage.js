@@ -168,6 +168,7 @@ async function confirmarPedido() {
     }
 }
 
+
 function bindEvents() {
     document.querySelector(".btn-aumentar")
         ?.addEventListener("click", aumentar);

@@ -1,5 +1,5 @@
 export function renderDishes(platos, onSelect) {
-    console.log("Render platos:", platos);
+
 
     const container = document.getElementById("menu-container");
     container.innerHTML = "";
@@ -31,8 +31,7 @@ export function renderDishes(platos, onSelect) {
 }
 
 export function renderCategories(categories, onFilter) {
-    console.log("Render categorías:", categories);
-
+    
     const container = document.getElementById("filter-buttons");
     container.innerHTML =
         `<button class="filter-btn active" data-category="all">Todos</button>`;
@@ -153,27 +152,31 @@ export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
     document.getElementById('comanda-fecha').textContent = formatearFecha(comanda.createdAt);
     document.getElementById('comanda-entrega').textContent = comanda.deliveryType?.name || 'No especificado';
     document.getElementById('comanda-notas').textContent = comanda.notes || 'Sin notas';
-    
+
     const itemsContainer = document.getElementById('comanda-items');
-    
+
     if (comanda.items && comanda.items.length > 0) {
         itemsContainer.innerHTML = comanda.items.map(item => {
             const cantidad = item.quantity || 1;
             const precioUnitario = obtenerPrecioUnitario(item);
             const subtotal = precioUnitario * cantidad;
-            
+
+            const notasHTML = item.notes ? 
+                `<br><span><strong>Notas del plato:</strong> ${item.notes}</span>` : 
+                '';
+
             return `
                 <div class="item-detalle">
                     <div class="item-imagen">
-                        <img src="${item.dish?.image || 'https://via.placeholder.com/80x80/2c5530/ffffff?text=Plato'}" 
-                             alt="${item.dish?.name || 'Plato'}" 
+                        <img src="${item.dish?.image || 'https://via.placeholder.com/80x80/2c5530/ffffff?text=Plato'}"
+                             alt="${item.dish?.name || 'Plato'}"
                              onerror="this.src='https://via.placeholder.com/80x80/2c5530/ffffff?text=Plato'">
                     </div>
                     <div class="item-info">
                         <div class="item-name">${item.dish?.name || 'Plato no disponible'}</div>
                         <div class="item-details">
                             <span><strong>Precio unitario:</strong> $${precioUnitario.toFixed(2)}</span>
-                            ${item.notes ? `<br><span><strong>Notas del plato:</strong> ${item.notes}</span>` : ''}
+                            ${notasHTML}
                             <br><span><strong>Estado:</strong> ${item.status?.name || 'Pendiente'}</span>
                         </div>
                     </div>

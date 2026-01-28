@@ -112,18 +112,23 @@ function agregarAlCarrito() {
         return;
     }
 
+    const notasPlato = document.getElementById("notas-plato").value || "";
+
     addItem({
         dishId: platoActual.id,
         nombre: platoActual.name,
         precio: platoActual.price,
         cantidad,
         imagen: platoActual.image,
-        tipoEntregaId: tipoEntrega
+        tipoEntregaId: tipoEntrega,
+        notas: notasPlato
     });
 
     closeModal("dish-detalles");
     renderCarrito(getItems());
     mostrarToast("Agregado al carrito", "success");
+    
+    document.getElementById("notas-plato").value = "";
 }
 
 async function confirmarPedido() {
@@ -135,25 +140,22 @@ async function confirmarPedido() {
     }
 
     const notasGenerales = document.getElementById("notas-generales-pedido")?.value || "";
+    
     const orden = {
         items: carrito.map(item => ({
             id: item.dishId,
             quantity: item.cantidad,
             notes: item.notas || ""
         })),
-        delivery: { 
+        delivery: {
             id: carrito[0].tipoEntregaId,
             to: document.getElementById("tipo-entrega-select").selectedOptions[0].text
         },
         notes: notasGenerales
     };
 
-    console.log("ORDEN ENVIADA:", orden);
-
     try {
         const res = await createOrder(orden);
-        console.log("Respuesta backend:", res);
-
         mostrarToast("Pedido confirmado", "success");
 
         clear();
@@ -167,7 +169,6 @@ async function confirmarPedido() {
         mostrarToast("Error al confirmar el pedido", "error");
     }
 }
-
 
 function bindEvents() {
     document.querySelector(".btn-aumentar")

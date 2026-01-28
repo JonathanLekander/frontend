@@ -5,9 +5,9 @@
 }
 
 header {
-    background-color: #e8d5c4; 
+    background-color: var(--color-cream); 
     padding: 1rem 2rem;
-    border-bottom: 2px solid #c98866; 
+    border-bottom: 2px solid var(--color-terracotta); 
     margin-bottom: 1rem;
 }
 
@@ -31,7 +31,7 @@ nav ul li:nth-child(2) {
 }
 
 nav a {
-    color: #2e2119; 
+    color: var(--color-brown); 
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 500;
@@ -40,14 +40,14 @@ nav a {
 }
 
 nav a[href="home.html"]:hover {
-    background-color: #c98866; 
-    color: #f5f0eb;
+    background-color: var(--color-terracotta); 
+    color: var(--color-beige);
     transform: scale(1.05);
     border-radius: 25px;
 }
 
 nav ul li:nth-child(2) strong {
-    color: #2e2119;
+    color: var(--color-brown);
     font-size: 1.3rem;
 }
 
@@ -68,14 +68,14 @@ nav ul li:nth-child(2) strong {
 #search-comanda {
     padding: 0.8rem 1rem;
     width: 100%;
-    border: 1px solid #c98866; 
+    border: 1px solid var(--color-terracotta); 
     border-radius: 25px;
     font-size: 1rem;
     outline: none;
 }
 
 #search-comanda:focus {
-    border-color: #3d2817;
+    border-color: var(--color-dark-brown);
 }
 
 .comandas-grid {
@@ -88,11 +88,11 @@ nav ul li:nth-child(2) strong {
 }
 
 .comanda-card {
-    border: 1px solid #c98866;
+    border: 1px solid var(--color-terracotta);
     border-radius: 8px;
     padding: 1.25rem;
     transition: transform 0.3s;
-    background: white;
+    background: var(--color-white);
 }
 
 .comanda-card:hover {
@@ -106,13 +106,13 @@ nav ul li:nth-child(2) strong {
     align-items: center;
     margin-bottom: 0.75rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-light-gray);
 }
 
 .comanda-number {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #3d2817;
+    color: var(--color-dark-brown);
 }
 
 .comanda-status {
@@ -122,11 +122,26 @@ nav ul li:nth-child(2) strong {
     font-weight: bold;
 }
 
-.status-1 { background: #fff3cd; color: #856404; }
-.status-2 { background: #cce7ff; color: #004085; }
-.status-3 { background: #d4edda; color: #155724; }
-.status-4 { background: #d1ecf1; color: #0c5460; }
-.status-5 { background: #e2e3e5; color: #383d41; }
+.status-1 {
+     background: var(--color-status-pending-bg); 
+     color: var(--color-status-pending-text); 
+}
+.status-2 { 
+    background: var(--color-status-inprogress-bg); 
+    color: var(--color-status-inprogress-text); 
+}
+.status-3 { 
+    background: var(--color-status-ready-bg); 
+    color: var(--color-status-ready-text); 
+}
+.status-4 { 
+    background: var(--color-status-delivery-bg); 
+    color: var(--color-status-delivery-text); 
+}
+.status-5 {
+    background: var(--color-status-closed-bg); 
+    color: var(--color-status-closed-text); 
+}
 
 .comanda-info {
     margin-bottom: 0.75rem;
@@ -141,7 +156,7 @@ nav ul li:nth-child(2) strong {
 
 .info-label {
     font-weight: bold;
-    color: #666;
+    color: var(--color-gray);
 }
 
 .comanda-items {
@@ -151,7 +166,7 @@ nav ul li:nth-child(2) strong {
 .comanda-items h4 {
     margin-bottom: 0.5rem;
     font-size: 1rem;
-    color: #2e2119;
+    color: var(--color-brown);
 }
 
 .item-control {
@@ -159,10 +174,10 @@ nav ul li:nth-child(2) strong {
     align-items: center;
     gap: 0.75rem;
     padding: 0.6rem;
-    border: 1px solid #eee;
+    border: 1px solid var(--color-light-gray);
     border-radius: 6px;
     margin-bottom: 0.4rem;
-    background: #f9f9f9;
+    background: var(--color-beige);
 }
 
 .item-imagen {
@@ -174,7 +189,7 @@ nav ul li:nth-child(2) strong {
     height: 50px;
     object-fit: cover;
     border-radius: 4px;
-    border: 1px solid #c98866;
+    border: 1px solid var(--color-terracotta);
 }
 
 .item-info {
@@ -184,7 +199,7 @@ nav ul li:nth-child(2) strong {
 
 .item-name {
     font-weight: bold;
-    color: #2e2119;
+    color: var(--color-brown);
     margin-bottom: 0.2rem;
     font-size: 0.9rem;
     word-wrap: break-word;
@@ -192,21 +207,21 @@ nav ul li:nth-child(2) strong {
 
 .item-estado-actual {
     font-size: 0.8rem;
-    color: #666;
+    color: var(--color-gray);
     white-space: nowrap;
 }
 
 .item-notes {
     font-size: 0.75rem;
-    color: #888;
+    color: var(--color-gray);
     font-style: italic;
     word-wrap: break-word;
 }
 
 .btn-cambiar-estado {
     padding: 0.3rem 0.6rem;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -216,7 +231,7 @@ nav ul li:nth-child(2) strong {
 }
 
 .btn-cambiar-estado:hover {
-    background: #b57755;
+    background: var(--color-dark-terracotta);
 }
 
 
@@ -233,7 +248,7 @@ nav ul li:nth-child(2) strong {
 }
 
 .detalles-content {
-    background-color: white;
+    background-color: var(--color-white);
     margin: 2rem auto;
     padding: 1.25rem;
     border-radius: 12px;
@@ -244,7 +259,7 @@ nav ul li:nth-child(2) strong {
 
 .detalles-content h2 {
     margin-bottom: 1rem;
-    color: #2e2119;
+    color: var(--color-brown);
     font-size: 1.3rem;
 }
 
@@ -256,21 +271,21 @@ nav ul li:nth-child(2) strong {
     display: block;
     margin-bottom: 0.4rem;
     font-size: 0.9rem;
-    color: #2e2119;
+    color: var(--color-brown);
     font-weight: bold;
 }
 
 #estado-select {
     width: 100%;
     padding: 0.7rem;
-    border: 2px solid #c98866;
+    border: 2px solid var(--color-terracotta);
     border-radius: 8px;
     font-size: 0.9rem;
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 #estado-select:focus {
-    border-color: #3d2817;
+    border-color: var(--color-dark-brown);
     outline: none;
 }
 
@@ -283,9 +298,9 @@ nav ul li:nth-child(2) strong {
 .boton-cancelar {
     flex: 1;
     padding: 0.8rem;
-    background: #e8d5c4;
-    color: #2e2119;
-    border: 2px solid #c98866;
+    background: var(--color-cream);
+    color: var(--color-brown);
+    border: 2px solid var(--color-terracotta);
     border-radius: 8px;
     font-size: 1rem;
     font-weight: bold;
@@ -293,14 +308,14 @@ nav ul li:nth-child(2) strong {
 }
 
 .boton-cancelar:hover {
-    background: #d4c2b1;
+    background: var(--color-light-terracotta);
 }
 
 .boton-agregar {
     flex: 2;
     padding: 0.8rem;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -309,11 +324,11 @@ nav ul li:nth-child(2) strong {
 }
 
 .boton-agregar:hover {
-    background: #b57755;
+    background: var(--color-dark-terracotta);
 }
 
 .boton-agregar:disabled {
-    background: #cccccc;
+    background: var(--color-light-gray);
     cursor: not-allowed;
 }
 
@@ -321,8 +336,8 @@ nav ul li:nth-child(2) strong {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #c98866;
-    color: white;
+    background: var(--color-terracotta);
+    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
@@ -330,7 +345,7 @@ nav ul li:nth-child(2) strong {
     transform: translateX(400px);
     transition: transform 0.3s ease;
     max-width: 300px;
-    border: 1px solid #b57755;
+    border: 1px solid var(--color-dark-terracotta);
     font-weight: 500;
 }
 
@@ -339,19 +354,19 @@ nav ul li:nth-child(2) strong {
 }
 
 .toast.error {
-    background: #e8d5c4;
-    color: #2e2119; 
-    border: 1px solid #c98866;
+    background: var(--color-toast-error-bg);
+    color: var(--color-toast-error-text);
+    border: 1px solid var(--color-toast-error-border);
 }
 
 .toast.warning {
-    background: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeaa7;
+    background: var(--color-beige);
+    color: var(--color-toast-warning-text);
+    border: 1px solid var(--color-toast-warning-border);
 }
 
 .toast.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: var(--color-status-ready-bg);
+    color: var(--color-toast-success-text);
+    border: 1px solid var(--color-toast-success-border);
 }

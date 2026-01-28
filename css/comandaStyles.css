@@ -450,3 +450,26 @@ nav a[href="menu.html"]:hover {
     color: var(--color-toast-error-text);
     border: 1px solid var(--color-toast-error-border);
 }
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+#search-comanda {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 40px;
+    border: 1px solid var(--color-terracotta);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}

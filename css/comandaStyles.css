@@ -473,3 +473,9 @@ nav a[href="menu.html"]:hover {
     font-size: 1rem;
     outline: none;
 }
+nav a i {
+    margin-right: 8px;
+    font-size: 1.1rem; 
+    display: inline-flex; 
+    align-items: center;  
+}

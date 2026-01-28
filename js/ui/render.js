@@ -1,5 +1,3 @@
-import { formatearFecha } from '../utils/fecha.js';
-
 export function renderDishes(platos, onSelect) {
     console.log("Render platos:", platos);
 
@@ -98,9 +96,6 @@ export function renderCarrito(carrito) {
 }
 
 /*===========================================*/
-
-// /js/ui/render.js (añadir estas funciones)
-
 export function renderComandas(comandas, onVerDetalles) {
     return comandas.map(c => `
         <div class="comanda-card" data-order-id="${c.orderNumber}">
@@ -134,6 +129,22 @@ export function renderComandas(comandas, onVerDetalles) {
         </div>
     `).join('');
 }
+
+function formatearFecha(fecha) {
+    if (!fecha) return 'Fecha no disponible';
+    
+    const f = new Date(fecha);
+    f.setHours(f.getHours() - 3);
+    
+    const dia = f.getDate().toString().padStart(2, '0');
+    const mes = (f.getMonth() + 1).toString().padStart(2, '0');
+    const año = f.getFullYear();
+    const hora = f.getHours().toString().padStart(2, '0');
+    const minuto = f.getMinutes().toString().padStart(2, '0');
+    
+    return `${dia}/${mes}/${año} ${hora}:${minuto}`;
+}
+
 
 export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
     document.getElementById('comanda-numero').textContent = comanda.orderNumber;

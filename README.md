@@ -1,6 +1,6 @@
 Estructura que quiero obtener:
 /html
-├── home.html                 // landing (opcional)
+├── home.html               
 ├── menu.html
 ├── comandas.html
 ├── panel-control.html

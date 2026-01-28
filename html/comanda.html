@@ -6,6 +6,7 @@
     <title>Gestión de Comandas - LekEat</title>
     <link rel="stylesheet" href="../css/variable.css">
     <link rel="stylesheet" href="../css/comandaStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header class="comandas-header">
@@ -21,12 +22,11 @@
 
     <main class="comandas-main">
         <section class="comandas-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
             <h2 class="search-title">Buscar</h2>
-            
             <div class="comandas-controls">
                 <div class="search-box">
-                    <input type="text" id="search-comanda" placeholder="Buscar comanda por Nro de orden" 
-                           oninput="buscarComanda()">
+                    <input type="text" id="search-comanda" placeholder="Buscar comanda...">
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
         <div id="modal-comanda" class="modal">
             <div class="modal-content">
-                <span class="close-btn" onclick="cerrarModalComanda()">&times;</span>
+                <span class="close-btn">&times;</span>
                 
                 <h2>Comanda #<span id="comanda-numero"></span></h2>
                 
@@ -76,10 +76,10 @@
                 </div>
 
                 <div class="modal-buttons">
-                    <button class="btn-secundario" onclick="cerrarModalComanda()">
+                    <button class="btn-principal" id="btn-agregar-platos">
                         Volver
                     </button>
-                    <button class="btn-principal" onclick="agregarMasPlatos()">
+                    <button class="btn-secundario" id="btn-volver-modal">
                         Agregar Más Platos
                     </button>
                 </div>

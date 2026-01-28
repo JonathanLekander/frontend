@@ -343,6 +343,14 @@ nav a[href="menu.html"]:hover {
     cursor: pointer;
 }
 
+#modal-comanda .btn-principal,
+#modal-comanda .btn-secundario {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    height: 45px;
+}
+
+
 .btn-secundario:hover {
     background: var(--color-light-terracotta);
 }

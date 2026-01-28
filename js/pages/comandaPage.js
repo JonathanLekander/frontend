@@ -9,45 +9,32 @@ export class ComandaPage {
         this.comandas = [];
         this.comandaActual = null;
         this.menuCompleto = [];
-        
         this.init();
     }
-    
+
     async init() {
         await this.cargarMenuCompleto();
         await this.cargarComandas();
         this.setupEventListeners();
     }
-    
-    setupEventListeners() {
 
+    setupEventListeners() {
         const searchInput = document.getElementById('search-comanda');
-        if (searchInput) {
-            searchInput.addEventListener('input', () => this.buscarComanda());
-        }
-        const closeBtn = document.querySelector('.close-btn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.cerrarModalComanda());
-        }
+        if (searchInput) searchInput.addEventListener('input', () => this.buscarComanda());
+
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-principal')) {
-                this.agregarMasPlatos();
-            } else if (e.target.classList.contains('btn-secundario')) {
-                this.cerrarModalComanda();
-            }
+            if (e.target.classList.contains('btn-principal')) this.agregarMasPlatos();
+            if (e.target.classList.contains('btn-secundario')) this.cerrarModalComanda();
+            if (e.target.id === 'modal-comanda') this.cerrarModalComanda();
         });
-        document.addEventListener('click', (e) => {
-            if (e.target.id === 'modal-comanda') {
-                this.cerrarModalComanda();
-            }
-        });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.getElementById('modal-comanda').style.display === 'block') {
                 this.cerrarModalComanda();
             }
         });
     }
-    
+
     async cargarMenuCompleto() {
         try {
             const res = await getDishes();
@@ -56,10 +43,9 @@ export class ComandaPage {
             console.error('Error al cargar menú:', error);
         }
     }
-    
+
     async cargarComandas() {
         this.mostrarCargando(true);
-        
         try {
             this.comandas = await getOrders();
             this.mostrarComandas(this.comandas);
@@ -69,45 +55,35 @@ export class ComandaPage {
             this.mostrarCargando(false);
         }
     }
-    
+
     buscarComanda() {
         const numero = document.getElementById('search-comanda').value.trim();
-        
-        if (!numero) {
-            this.mostrarComandas(this.comandas);
-            return;
-        }
-        
-        const encontradas = this.comandas.filter(c => 
-            c.orderNumber.toString() === numero
-        );
-           
+        if (!numero) return this.mostrarComandas(this.comandas);
+
+        const encontradas = this.comandas.filter(c => c.orderNumber.toString() === numero);
         this.mostrarComandas(encontradas);
     }
+ 
     
     mostrarComandas(lista) {
         const contenedor = document.getElementById('lista-comandas');
-        
         if (!lista || lista.length === 0) {
             contenedor.innerHTML = '<p>No se encontraron comandas</p>';
             return;
         }
+
         contenedor.innerHTML = renderComandas(lista);
         document.querySelectorAll('.comanda-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const orderId = card.dataset.orderId;
-                if (orderId) {
-                    this.verDetallesComanda(parseInt(orderId));
-                }
+                if (orderId) this.verDetallesComanda(parseInt(orderId));
             });
         });
     }
-    
+
     obtenerPrecioDelMenu(item) {
-        if (!this.menuCompleto.length) {
-            return item.price || 0;
-        }
+        if (!this.menuCompleto.length) return item.price || 0;
 
         const platoEnMenu = this.menuCompleto.find(plato => {
             if (plato.id === item.dishId) return true;
@@ -115,9 +91,10 @@ export class ComandaPage {
             if (item.dish && plato.name === item.dish.name) return true;
             return false;
         });
+
         return platoEnMenu?.price || item.price || 0;
     }
-    
+
     async verDetallesComanda(orderId) {
         try {
             this.comandaActual = await getOrderById(orderId);
@@ -126,54 +103,55 @@ export class ComandaPage {
             mostrarToast('Error al cargar los detalles de la comanda', 'error');
         }
     }
-    
+
     mostrarModalComanda(comanda) {
         const modal = document.getElementById('modal-comanda');
         if (!modal) return;
         modal.style.display = 'block';
+
+        // Mostrar botón "Agregar más platos" solo si la comanda no está cerrada
+        const btnAgregar = document.getElementById('btn-agregar-platos');
+        if (comanda.status?.name === 'Closed' || comanda.status?.id === 5) {
+            btnAgregar.style.display = 'none';
+        } else {
+            btnAgregar.style.display = 'inline-block';
+        }
+
         renderDetallesComanda(comanda, this.obtenerPrecioDelMenu.bind(this));
     }
-    
+
     cerrarModalComanda() {
         const modal = document.getElementById('modal-comanda');
-        if (modal) {
-            modal.style.display = 'none';
-            this.comandaActual = null;
-        }
+        if (modal) modal.style.display = 'none';
+        this.comandaActual = null;
     }
-    
+
     agregarMasPlatos() {
         if (!this.comandaActual) {
             mostrarToast('No hay comanda seleccionada', 'error');
             return;
         }
-        
-        const estado = this.comandaActual.status?.id;
-        if (estado === 5 || this.comandaActual.status?.name === 'Closed') {
+
+        if (this.comandaActual.status?.name === 'Closed' || this.comandaActual.status?.id === 5) {
             mostrarToast('No se pueden agregar platos a una comanda cerrada', 'error');
             return;
         }
-        
-        setComandaActiva(this.comandaActual.orderNumber.toString());
+
+        // Guardar la comanda completa para el menú
+        setComandaActiva(this.comandaActual);
         window.location.href = 'menu.html';
     }
-    
+
     mostrarCargando(mostrar) {
         const elemento = document.getElementById('cargando-comandas');
         const lista = document.getElementById('lista-comandas');
-        if (elemento) {
-            elemento.style.display = mostrar ? 'block' : 'none';
-        }
-        if (lista && mostrar) {
-            lista.innerHTML = '';
-        }
+        if (elemento) elemento.style.display = mostrar ? 'block' : 'none';
+        if (lista && mostrar) lista.innerHTML = '';
     }
-    
+
     mostrarError(mensaje) {
         const contenedor = document.getElementById('lista-comandas');
-        if (contenedor) {
-            contenedor.innerHTML = `<p class="error">${mensaje}</p>`;
-        }
+        if (contenedor) contenedor.innerHTML = `<p class="error">${mensaje}</p>`;
         mostrarToast(mensaje, 'error');
     }
 }

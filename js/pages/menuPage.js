@@ -70,7 +70,8 @@ async function init() {
 
         initBuscador();
         bindEvents();
-
+        mostrarBotonSalirComanda();
+        
     } catch (err) {
         console.error(err);
         mostrarToast("Error cargando el menú", "error");
@@ -120,6 +121,7 @@ function selectDish(dish) {
     document.getElementById("precio-total").textContent = dish.price.toFixed(2);
     document.getElementById("tipo-entrega-select").value = "";
     document.querySelector(".btn-agregar-carrito").onclick = agregarAlCarrito;
+    filtrarTiposEntregaPorOrigen(); 
     openModal("dish-detalles");
 }
 
@@ -141,16 +143,77 @@ function disminuir() {
         actualizarTotal();
     }
 }
+function mostrarBotonSalirComanda() {
+    const btn = document.getElementById('btnSalirComanda');
+    if (!btn) return;
+
+    const hayComanda = !!sessionStorage.getItem('comandaActiva');
+    btn.style.display = hayComanda ? 'inline-block' : 'none';
+}
+
+function filtrarTiposEntregaPorOrigen() {
+    const select = document.getElementById("tipo-entrega-select");
+    if (!select) return;
+
+    const carrito = getItems();
+    const tipoComanda = sessionStorage.getItem('comandaDeliveryTypeId');
+
+    let tipoPermitido = null;
+
+    if (carrito.length > 0) {
+        tipoPermitido = String(carrito[0].tipoEntregaId);
+    } else if (tipoComanda) {
+        tipoPermitido = String(tipoComanda);
+    }
+
+    if (!tipoPermitido) {
+        [...select.options].forEach(opt => opt.style.display = "");
+        return;
+    }
+
+    let hayCoincidencia = false;
+
+    [...select.options].forEach(opt => {
+        if (!opt.value) return;
+
+        if (String(opt.value) === tipoPermitido) {
+            opt.style.display = "";
+            hayCoincidencia = true;
+        } else {
+            opt.style.display = "none";
+        }
+    });
+
+    if (!hayCoincidencia) {
+        console.warn("⚠️ Tipo de entrega no coincide, mostrando todos");
+        [...select.options].forEach(opt => opt.style.display = "");
+        mostrarToast(
+            "No se pudo determinar el tipo de entrega de la comanda",
+            "error"
+        );
+        return;
+    }
+
+    select.value = tipoPermitido;
+}
+
+
 
 function agregarAlCarrito() {
     if (!platoActual) return;
 
-    const tipoEntrega = document.getElementById("tipo-entrega-select").value;
+    let tipoEntrega = document.getElementById("tipo-entrega-select").value;
+
+    const tipoComanda = sessionStorage.getItem('comandaDeliveryTypeId');
+    if (tipoComanda) {
+        tipoEntrega = tipoComanda;
+    }
 
     if (!tipoEntrega) {
         mostrarToast("Seleccioná un tipo de entrega", "error");
         return;
     }
+
 
     const notasPlato = document.getElementById("notas-plato").value || "";
 
@@ -179,70 +242,64 @@ async function confirmarPedido() {
         return;
     }
 
-    const notasGenerales = document.getElementById("notas-generales-pedido")?.value || "";
-    
-    const comandaActiva = sessionStorage.getItem('comandaActiva');
-    
+    const notasGenerales =
+        document.getElementById("notas-generales-pedido")?.value || "";
+
+    const comandaActiva = sessionStorage.getItem("comandaActiva");
+
+    const tipoEntregaId = carrito[0].tipoEntregaId;
+    const tipoEntregaTexto =
+        document.getElementById("tipo-entrega-select")
+            ?.selectedOptions[0]?.text || "Take away";
+
+    const tiposEnCarrito = [...new Set(carrito.map(i => i.tipoEntregaId))];
+    if (tiposEnCarrito.length > 1) {
+        mostrarToast(
+            "Todos los platos deben tener el mismo tipo de entrega",
+            "error"
+        );
+        return;
+    }
+
     const itemsParaEnviar = carrito.map(item => ({
         id: item.dishId,
         quantity: item.cantidad,
         notes: item.notas || ""
     }));
-    
+
     const ordenBase = {
         items: itemsParaEnviar,
         delivery: {
-            id: carrito[0].tipoEntregaId,
-            to: document.getElementById("tipo-entrega-select").selectedOptions[0].text
+            id: tipoEntregaId,
+            to: tipoEntregaTexto
         },
         notes: notasGenerales
     };
 
     try {
-        let resultado;
-        let mensaje = "";
-        
         if (comandaActiva) {
-            console.log("Actualizando comanda existente #" + comandaActiva);
-            
-            resultado = await updateOrder(comandaActiva, ordenBase);
-            mensaje = `Platos agregados a comanda #${comandaActiva}`;
-            
-            sessionStorage.removeItem('comandaActiva');
-            sessionStorage.removeItem('comandaInfo');
-            
-            const badge = document.querySelector('.comanda-badge');
-            if (badge) badge.remove();
-            
-            const titulo = document.querySelector('nav strong');
-            if (titulo) titulo.textContent = 'Menú';
-            
-        } else {
-            console.log("Creando nueva comanda");
-            
-            resultado = await createOrder(ordenBase);
-            mensaje = "Pedido confirmado";
-        }
 
-        mostrarToast(mensaje, "success");
+            await updateOrder(comandaActiva, ordenBase);
+            mostrarToast(
+                `Platos agregados a comanda #${comandaActiva}`,
+                "success"
+            );
+        } else {
+            await createOrder(ordenBase);
+            mostrarToast("Nueva comanda creada", "success");
+        }
 
         clear();
         renderCarrito(getItems());
-
         document.getElementById("notas-generales-pedido").value = "";
         document.getElementById("carrito-modal").style.display = "none";
-        
-        if (comandaActiva) {
-            setTimeout(() => {
-                window.location.href = 'comanda.html';
-            }, 1500);
-        }
 
     } catch (err) {
         console.error("Error confirmando pedido:", err);
-        mostrarToast("Error al confirmar el pedido: " + err.message, "error");
+        mostrarToast("Error al confirmar el pedido", "error");
     }
 }
+
 
 function bindEvents() {
     document.querySelector(".btn-aumentar")
@@ -277,4 +334,11 @@ function bindEvents() {
 
     document.querySelector(".btn-confirmar-pedido")
         ?.addEventListener("click", confirmarPedido);
+    
+    document.getElementById('btnSalirComanda')
+        ?.addEventListener("click", () => {
+            sessionStorage.removeItem('comandaActiva');
+            sessionStorage.removeItem('comandaDeliveryTypeId');
+            window.location.reload();
+        });
 }

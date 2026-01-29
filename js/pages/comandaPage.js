@@ -126,26 +126,35 @@ export class ComandaPage {
     }
 
     agregarMasPlatos() {
-        if (!this.comandaActual) {
-            mostrarToast('No hay comanda seleccionada', 'error');
-            return;
-        }
-
-        if (this.comandaActual.status?.name === 'Closed' || this.comandaActual.status?.id === 5) {
-            mostrarToast('No se pueden agregar platos a una comanda cerrada', 'error');
-            return;
-        }
-
-        sessionStorage.setItem('comandaActiva', this.comandaActual.orderNumber.toString());
-        
-        sessionStorage.setItem('comandaInfo', JSON.stringify({
-            numero: this.comandaActual.orderNumber,
-            estado: this.comandaActual.status?.name,
-            total: this.comandaActual.totalAmount
-        }));
-        
-        window.location.href = 'menu.html';
+    if (!this.comandaActual) {
+        mostrarToast('No hay comanda seleccionada', 'error');
+        return;
     }
+
+    if (this.comandaActual.status?.name === 'Closed' || this.comandaActual.status?.id === 5) {
+        mostrarToast('No se pueden agregar platos a una comanda cerrada', 'error');
+        return;
+    }
+
+    sessionStorage.setItem(
+        'comandaActiva',
+        this.comandaActual.orderNumber.toString()
+    );
+
+    sessionStorage.setItem(
+        'comandaDeliveryTypeId',
+        this.comandaActual.deliveryType?.id
+    );
+
+    sessionStorage.setItem('comandaInfo', JSON.stringify({
+        numero: this.comandaActual.orderNumber,
+        estado: this.comandaActual.status?.name,
+        total: this.comandaActual.totalAmount
+    }));
+
+    window.location.href = 'menu.html';
+}
+
 
     mostrarCargando(mostrar) {
         const elemento = document.getElementById('cargando-comandas');

@@ -70,6 +70,7 @@ async function init() {
 
         initBuscador();
         bindEvents();
+        FiltroClick();
         mostrarBotonSalirComanda();
         
     } catch (err) {
@@ -232,6 +233,7 @@ function agregarAlCarrito() {
     mostrarToast("Agregado al carrito", "success");
     
     document.getElementById("notas-plato").value = "";
+
 }
 
 async function confirmarPedido() {
@@ -298,8 +300,34 @@ async function confirmarPedido() {
         console.error("Error confirmando pedido:", err);
         mostrarToast("Error al confirmar el pedido", "error");
     }
+
 }
 
+function FiltroClick() {
+    const filtersBtn = document.querySelector('.filters-btn');
+    const filtersDropdown = document.querySelector('.filters-dropdown');
+    
+    if (filtersBtn && filtersDropdown) {
+
+        filtersBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filtersDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!filtersDropdown.contains(e.target)) {
+                filtersDropdown.classList.remove('active');
+            }
+        });
+        
+        
+        document.querySelectorAll('.filter-options button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filtersDropdown.classList.remove('active');
+            });
+        });
+    }
+}
 
 function bindEvents() {
     document.querySelector(".btn-aumentar")

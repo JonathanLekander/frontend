@@ -29,7 +29,6 @@ Estructura que quiero obtener:
  │   └── render.js            // render de listas, cards, items
  │
  ├── utils/
- │   ├── fecha.js             // formatearFecha
  │   ├── storage.js           // localStorage / sessionStorage
  │   └── constants.js         // estados, URLs, ids
  │

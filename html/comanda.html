@@ -6,14 +6,15 @@
     <title>Gestión de Comandas - LekEat</title>
     <link rel="stylesheet" href="../css/variable.css">
     <link rel="stylesheet" href="../css/comandaStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header class="comandas-header">
         <nav>
             <ul>
-                <li><a href="home.html">Inicio</a></li>
+                <li><a href="home.html"><i class="fa-solid fa-house"></i>Inicio</a></li>
                  <li><a><strong>Comandas</strong></a></li>
-                <li><a href="menu.html">Menu</a></li>
+                <li><a href="menu.html"><i class="fa-solid fa-utensils"></i>Menu</a></li>
                
             </ul>
         </nav>
@@ -22,11 +23,10 @@
     <main class="comandas-main">
         <section class="comandas-container">
             <h2 class="search-title">Buscar</h2>
-            
             <div class="comandas-controls">
                 <div class="search-box">
-                    <input type="text" id="search-comanda" placeholder="Buscar comanda por Nro de orden" 
-                           oninput="buscarComanda()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-comanda" placeholder="Buscar comanda...">
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
         <div id="modal-comanda" class="modal">
             <div class="modal-content">
-                <span class="close-btn" onclick="cerrarModalComanda()">&times;</span>
+                <span class="close-btn">&times;</span>
                 
                 <h2>Comanda #<span id="comanda-numero"></span></h2>
                 
@@ -76,18 +76,18 @@
                 </div>
 
                 <div class="modal-buttons">
-                    <button class="btn-secundario" onclick="cerrarModalComanda()">
-                        Volver
-                    </button>
-                    <button class="btn-principal" onclick="agregarMasPlatos()">
-                        Agregar Más Platos
-                    </button>
+                 <button class="btn-secundario" id="btn-cancelar-modal">
+                    Cancelar
+                </button>
+                <button class="btn-principal" id="btn-agregar-platos">
+                    Agregar Más Platos
+                </button>
                 </div>
             </div>
         </div>
     </main>
     
     <div id="toast-notification" class="toast"></div>
-    <script src="../js/comanda.js"></script>
+    <script type="module" src="../js/pages/comandaPage.js"></script>
 </body>
 </html>

@@ -593,3 +593,26 @@ nav a[onclick="toggleCarrito()"]:hover {
     border: 1px solid var(--color-toast-success-border);
 }
 
+.btn-salir-comanda {
+    margin-left: auto;
+    height: 46px;             
+    padding: 0 18px;
+
+    background-color: #e74c3c;
+    color: white;
+    font-size: 0.8rem;
+
+    border: none;
+    border-radius: 25px;       
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-salir-comanda:hover {
+    background-color: #c0392b;
+}
+
+

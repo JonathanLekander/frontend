@@ -343,6 +343,14 @@ nav a[href="menu.html"]:hover {
     cursor: pointer;
 }
 
+#modal-comanda .btn-principal,
+#modal-comanda .btn-secundario {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    height: 45px;
+}
+
+
 .btn-secundario:hover {
     background: var(--color-light-terracotta);
 }
@@ -449,4 +457,33 @@ nav a[href="menu.html"]:hover {
     background: var(--color-toast-error-bg);
     color: var(--color-toast-error-text);
     border: 1px solid var(--color-toast-error-border);
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+#search-comanda {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 40px;
+    border: 1px solid var(--color-terracotta);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+nav a i {
+    margin-right: 8px;
+    font-size: 1.1rem; 
+    display: inline-flex; 
+    align-items: center;  
 }

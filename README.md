@@ -1,6 +1,6 @@
 Estructura que quiero obtener:
 /html
-├── home.html                 // landing (opcional)
+├── home.html               
 ├── menu.html
 ├── comandas.html
 ├── panel-control.html
@@ -37,5 +37,4 @@ Estructura que quiero obtener:
  │   ├── menuPage.js         // lógica SOLO del menú
  │   ├── comandaPage.js      // lista y detalle de comandas
  │   └── pControlPage.js// cocina / control estados
- │
- └── main.js                  // inicialización general (opcional)
+ 

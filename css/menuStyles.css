@@ -1,15 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-header {
-    background-color: var(--color-cream); 
-    padding: 1rem 2rem;
-    border-bottom: 2px solid var(--color-terracotta); 
-    margin-bottom: 1rem;
-}
 
 nav ul {
     list-style: none;
@@ -34,6 +22,7 @@ nav a[href="home.html"]:hover {
     transform: scale(1.05);
     border-radius: 25px;
 }
+
 .nav-inicio {
     display: inline-flex;
     align-items: center;
@@ -44,9 +33,6 @@ nav a[href="home.html"]:hover {
     font-size: 1.1rem;
     line-height: 1;
 }
-
-
-
 
 .controls-container {
     display: flex;
@@ -64,7 +50,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     border-radius: 25px;
 }
 
-
 .search-box {
     flex: 1;
     max-width: 400px;
@@ -81,6 +66,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-size: 1rem;
     outline: none;
 }
+
 .search-box i {
     position: absolute;
     left: 12px;
@@ -99,8 +85,48 @@ nav a[onclick="toggleCarrito()"]:hover {
 
 .filters-dropdown {
     position: relative;
+    z-index: 100; 
 }
 
+.filter-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    border: 1px solid var(--color-terracotta);
+    border-radius: 8px;
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(201, 136, 102, 0.2);
+    z-index: 1000;
+}
+
+
+#btnSalirComanda {
+    margin-left: auto;
+    height: 46px;             
+    padding: 0 18px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 25px;       
+    cursor: pointer;
+    display: none; 
+    align-items: center;
+    justify-content: center;
+}
+
+#btnSalirComanda.visible {
+    display: flex; 
+}
+
+#btnSalirComanda:hover {
+    background-color: #c0392b;
+}
 .filters-btn {
     padding: 0.8rem 1.5rem;
     border: 1px solid var(--color-terracotta); 
@@ -129,7 +155,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.2);
 }
 
-.filters-dropdown:hover .filter-options {
+.filters-dropdown.active .filter-options {
     display: flex;
 }
 
@@ -147,6 +173,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     color: var(--color-beige);
     border-color: var(--color-terracotta);
 }
+
 
 .dishes-grid {
     display: grid;
@@ -247,6 +274,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     margin: 1rem 0;
     color: var(--color-brown);
 }
+
 .precio-total span {
     font-size: 1.5rem;
     color: var(--color-terracotta); 
@@ -306,10 +334,32 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-size: 0.9rem;
 }
 
+.tipo-entrega {
+    margin-top: 1rem;
+}
+
+.tipo-entrega .notas-titulo {
+    padding-left: 0.25rem;
+}
+
+#tipo-entrega-select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--color-terracotta); 
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--color-white);
+    margin-top: 0.5rem;
+}
+
+#tipo-entrega-select:focus {
+    border-color: var(--color-dark-brown); 
+    outline: none;
+}
+
 .boton-cancelar:hover {
     background: var(--color-light-terracotta);
 }
-
 
 .boton-agregar:hover {
     background: var(--color-light-terracotta);
@@ -324,7 +374,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-
     font-size: 0.95rem;
     font-weight: bold;
     border-radius: 8px;
@@ -348,30 +397,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     justify-content: space-between;
     align-items: center;
     gap: 0;
-}
-
-.tipo-entrega {
-    margin-top: 1rem;
-}
-
-.tipo-entrega .notas-titulo {
-    padding-left: 0.25rem;
-}
-
-
-#tipo-entrega-select {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--color-terracotta); 
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: var(--color-white);
-    margin-top: 0.5rem;
-}
-
-#tipo-entrega-select:focus {
-    border-color: var(--color-dark-brown); 
-    outline: none;
 }
 
 .modal-carrito {
@@ -467,7 +492,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     line-height: 1;
 }
 
-
 .btn-carrito:hover {
     background-color: var(--color-terracotta);
     color: var(--color-beige);
@@ -479,6 +503,7 @@ nav a[onclick="toggleCarrito()"]:hover {
     display: flex;
     gap: 1rem;
 }
+
 .carrito-content h2 {
     text-align: center;
     margin-bottom: 1rem;
@@ -499,7 +524,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-size: 1.5rem;
     color: var(--color-terracotta); 
 }
-
 
 .boton-principal {
     flex: 1;
@@ -569,8 +593,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     font-weight: 500;
 }
 
-
-
 .toast.show {
     transform: translateX(0);
 }
@@ -597,15 +619,12 @@ nav a[onclick="toggleCarrito()"]:hover {
     margin-left: auto;
     height: 46px;             
     padding: 0 18px;
-
     background-color: #e74c3c;
     color: white;
     font-size: 0.8rem;
-
     border: none;
     border-radius: 25px;       
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -615,4 +634,77 @@ nav a[onclick="toggleCarrito()"]:hover {
     background-color: #c0392b;
 }
 
+.dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: stretch;
+}
 
+.dish-card {
+    border: 1px solid var(--color-terracotta);
+    border-radius: 8px;
+    padding: 0;
+    text-align: center;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dish-card:hover {
+    transform: translateY(-3px);
+}
+
+.dish-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+    display: block;
+}
+
+.dish-card > div {
+    padding: 0.8rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--color-dark-brown);
+    line-height: 1.3;
+}
+
+.dish-card p {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    line-height: 1.4;
+    margin: 0 0 0.8rem 0;
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.price-container {
+    margin-top: auto;
+    padding: 0.8rem;
+    background: var(--color-cream);
+    border-top: 1px solid var(--color-terracotta);
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-terracotta);
+    display: block;
+}

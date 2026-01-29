@@ -15,13 +15,12 @@ export class PanelControlPage {
     }
 
     setupEventListeners() {
-        // Buscador
+       
         const searchInput = document.getElementById('search-comanda');
         if (searchInput) {
             searchInput.addEventListener('input', () => this.filtrarComandas());
         }
 
-        // Modal estado
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-cambiar-estado')) {
                 const orderNumber = parseInt(e.target.dataset.orderNumber);
@@ -49,7 +48,6 @@ export class PanelControlPage {
             }
         });
 
-        // Tecla Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.getElementById('modal-estado').style.display === 'block') {
                 this.cerrarModalEstado();
@@ -146,7 +144,6 @@ export class PanelControlPage {
     }
 }
 
-// Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     new PanelControlPage();
 });

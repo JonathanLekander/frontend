@@ -1,8 +1,18 @@
-:root{
-    /* Fuente */
-    --font-main: 'Arial', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    /* Colores */
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-beige);
+    color: var(--color-brown);
+    line-height: 1.6;
+}
+
+:root{
+    --font-main: 'Arial', sans-serif;
     --color-white: #ffffff;
     --color-beige: #f5f0eb;          
     --color-terracotta: #c98866;      
@@ -17,7 +27,6 @@
     --color-red: #dc3545;
     --color-golden-yellow: #e8b44f;
 
-    /*status*/
     --color-status-pending-bg: #fff3cd;
     --color-status-pending-text: #856404;
 
@@ -33,7 +42,6 @@
     --color-status-closed-bg: #e2e3e5;
     --color-status-closed-text: #383d41;
 
-     /* Toast colors */
     --color-toast-warning-bg: var(--color-beige);
     --color-toast-warning-text: #856404;
     --color-toast-warning-border: #ffeaa7;

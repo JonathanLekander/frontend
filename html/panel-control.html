@@ -6,12 +6,13 @@
     <title>Panel de Control - LekEat</title>
     <link rel="stylesheet" href="../css/variable.css">
     <link rel="stylesheet" href="../css/panel-control.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="home.html">Inicio</a></li>
+                <li><a href="home.html"><i class="fa-solid fa-house"></i>Inicio</a></li>
                 <li><strong>Panel de Control</strong></li>
                 <li></li>
             </ul>
@@ -21,6 +22,7 @@
     <main>
         <section class="controls-container">
             <form class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="search-comanda" placeholder="Buscar comanda...">
             </form>
         </section>
@@ -58,6 +60,6 @@
     </main>
 
     <div id="toast" class="toast"></div>
-    <script src="../js/panel-control.js"></script>
+    <script type="module" src="../js/pages/pControlPage.js"></script>
 </body>
 </html>

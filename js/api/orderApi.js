@@ -44,3 +44,19 @@ export async function getOrderById(id) {
     return response.json();
 }
 
+export async function updateOrderItemStatus(orderNumber, itemId, data) {
+    const response = await fetch(`https://localhost:7266/api/v1/Order/${orderNumber}/items/${itemId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    const respJson = await response.json().catch(() => null);
+
+    if (!response.ok) {
+        console.error("Backend error:", respJson);
+        throw new Error(respJson?.message || 'Error actualizando estado del item');
+    }
+
+    return respJson;
+}

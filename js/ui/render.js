@@ -191,3 +191,98 @@ export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
         itemsContainer.innerHTML = '<p>No hay items en esta comanda</p>';
     }
 }
+
+// ================= FUNCIONES PARA PANEL DE CONTROL =================
+
+export function renderComandasControlPanel(comandasLista) {
+    return comandasLista.map(comanda => {
+        const fechaFormateada = formatearFecha(comanda.createdAt);
+        const notasHTML = comanda.notes ? 
+            `<div class="info-item">
+                <span class="info-label">Notas:</span>
+                <span>${comanda.notes}</span>
+            </div>` : '';
+
+        const itemsHTML = comanda.items ? comanda.items.map(item => {
+            const notasItem = item.notes ? 
+                `<div class="item-notes">Notas: ${item.notes}</div>` : '';
+            
+            return `
+                <div class="item-control">
+                    <div class="item-imagen">
+                        <img src="${item.dish?.image || 'https://via.placeholder.com/50x50/2c5530/ffffff?text=Plato'}" 
+                             alt="${item.dish?.name || 'Plato'}"
+                             onerror="this.src='https://via.placeholder.com/50x50/2c5530/ffffff?text=Plato'">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-name">${item.dish?.name || 'Plato'} x${item.quantity || 1}</div>
+                        <div class="item-estado-actual">Estado: ${item.status?.name || 'Pendiente'}</div>
+                        ${notasItem}
+                    </div>
+                    <button class="btn-cambiar-estado" 
+                            data-order-number="${comanda.orderNumber}"
+                            data-item-id="${item.id}">
+                        Cambiar Estado
+                    </button>
+                </div>
+            `;
+        }).join('') : '<p>No hay items en esta comanda</p>';
+
+        return `
+            <div class="comanda-card">
+                <div class="comanda-header">
+                    <span class="comanda-number">Comanda #${comanda.orderNumber}</span>
+                    <span class="comanda-status status-${comanda.status?.id || 1}">
+                        ${comanda.status?.name || 'Pendiente'}
+                    </span>
+                </div>
+                
+                <div class="comanda-info">
+                    <div class="info-item">
+                        <span class="info-label">Total:</span>
+                        <span>$${comanda.totalAmount || 0}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Entrega:</span>
+                        <span>${comanda.deliveryType?.name || 'No especificado'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Fecha:</span>
+                        <span>${fechaFormateada}</span>
+                    </div>
+                    ${notasHTML}
+                </div>
+
+                <div class="comanda-items">
+                    <h4>Items del Pedido:</h4>
+                    ${itemsHTML}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+export function renderModalEstado(itemData) {
+    document.getElementById('modal-item-nombre').textContent = itemData.itemNombre;
+    document.getElementById('modal-comanda-numero').textContent = itemData.orderNumber;
+    document.getElementById('modal-item-notas').textContent = itemData.notas || 'Sin notas';
+    document.getElementById('modal-estado-actual').textContent = obtenerNombreEstado(itemData.estadoActual);
+    
+    const select = document.getElementById('estado-select');
+    if (select) {
+        select.value = itemData.estadoActual;
+    }
+}
+
+// ================= FUNCIONES AUXILIARES =================
+
+function obtenerNombreEstado(id) {
+    const estados = {
+        1: 'Pending',
+        2: 'In Progress', 
+        3: 'Ready',
+        4: 'Delivery',
+        5: 'Closed'
+    };
+    return estados[id] || 'Desconocido';
+}

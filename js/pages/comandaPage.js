@@ -109,7 +109,6 @@ export class ComandaPage {
         if (!modal) return;
         modal.style.display = 'block';
 
-        // Mostrar botón "Agregar más platos" solo si la comanda no está cerrada
         const btnAgregar = document.getElementById('btn-agregar-platos');
         if (comanda.status?.name === 'Closed' || comanda.status?.id === 5) {
             btnAgregar.style.display = 'none';
@@ -137,8 +136,14 @@ export class ComandaPage {
             return;
         }
 
-        // Guardar la comanda completa para el menú
-        setComandaActiva(this.comandaActual);
+        sessionStorage.setItem('comandaActiva', this.comandaActual.orderNumber.toString());
+        
+        sessionStorage.setItem('comandaInfo', JSON.stringify({
+            numero: this.comandaActual.orderNumber,
+            estado: this.comandaActual.status?.name,
+            total: this.comandaActual.totalAmount
+        }));
+        
         window.location.href = 'menu.html';
     }
 

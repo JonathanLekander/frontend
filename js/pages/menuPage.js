@@ -5,7 +5,7 @@ import { renderDishes, renderCategories, renderCarrito, renderDeliveryTypes } fr
 import { addItem, getItems, removeItem, clear } from "../services/carritoService.js";
 import { openModal, closeModal } from "../ui/modal.js";
 import { mostrarToast } from "../ui/toast.js";
-import { createOrder } from "../api/orderApi.js";
+import { createOrder, updateOrder } from "../api/orderApi.js";
 
 let platos = [];
 let platoActual = null;
@@ -15,8 +15,48 @@ let categoriaActiva = "all";
 
 document.addEventListener("DOMContentLoaded", init);
 
+function verificarComandaActiva() {
+    const comandaNumero = sessionStorage.getItem('comandaActiva');
+    
+    if (comandaNumero) {
+        console.log('Modo: agregando a comanda #' + comandaNumero);
+        
+       
+        const titulo = document.querySelector('nav strong');
+        if (titulo) {
+            titulo.textContent = `Menú (Comanda #${comandaNumero})`;
+        }
+        
+        const carritoBtn = document.querySelector('.btn-carrito');
+        if (carritoBtn && !carritoBtn.querySelector('.comanda-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'comanda-badge';
+            badge.textContent = `#${comandaNumero}`;
+            badge.style.cssText = `
+                background: var(--color-terracotta);
+                color: white;
+                border-radius: 12px;
+                padding: 2px 8px;
+                font-size: 0.8rem;
+                margin-left: 5px;
+            `;
+            carritoBtn.appendChild(badge);
+        }
+        
+        return comandaNumero;
+    }
+    
+    return null;
+}
+
+
 async function init() {
     try {
+        const comandaActiva = verificarComandaActiva();
+        
+        if (comandaActiva) {
+            console.log('Agregando platos a comanda existente #' + comandaActiva);
+        }
         platos = await getDishes();
         renderDishes(platos, selectDish);
 
@@ -141,12 +181,16 @@ async function confirmarPedido() {
 
     const notasGenerales = document.getElementById("notas-generales-pedido")?.value || "";
     
-    const orden = {
-        items: carrito.map(item => ({
-            id: item.dishId,
-            quantity: item.cantidad,
-            notes: item.notas || ""
-        })),
+    const comandaActiva = sessionStorage.getItem('comandaActiva');
+    
+    const itemsParaEnviar = carrito.map(item => ({
+        id: item.dishId,
+        quantity: item.cantidad,
+        notes: item.notas || ""
+    }));
+    
+    const ordenBase = {
+        items: itemsParaEnviar,
         delivery: {
             id: carrito[0].tipoEntregaId,
             to: document.getElementById("tipo-entrega-select").selectedOptions[0].text
@@ -155,18 +199,48 @@ async function confirmarPedido() {
     };
 
     try {
-        const res = await createOrder(orden);
-        mostrarToast("Pedido confirmado", "success");
+        let resultado;
+        let mensaje = "";
+        
+        if (comandaActiva) {
+            console.log("Actualizando comanda existente #" + comandaActiva);
+            
+            resultado = await updateOrder(comandaActiva, ordenBase);
+            mensaje = `Platos agregados a comanda #${comandaActiva}`;
+            
+            sessionStorage.removeItem('comandaActiva');
+            sessionStorage.removeItem('comandaInfo');
+            
+            const badge = document.querySelector('.comanda-badge');
+            if (badge) badge.remove();
+            
+            const titulo = document.querySelector('nav strong');
+            if (titulo) titulo.textContent = 'Menú';
+            
+        } else {
+            console.log("Creando nueva comanda");
+            
+            resultado = await createOrder(ordenBase);
+            mensaje = "Pedido confirmado";
+        }
+
+        mostrarToast(mensaje, "success");
 
         clear();
         renderCarrito(getItems());
 
         document.getElementById("notas-generales-pedido").value = "";
         document.getElementById("carrito-modal").style.display = "none";
+        
+        if (comandaActiva) {
+            setTimeout(() => {
+                window.location.href = 'comanda.html';
+            }, 1500);
+        }
 
     } catch (err) {
         console.error("Error confirmando pedido:", err);
-        mostrarToast("Error al confirmar el pedido", "error");
+        mostrarToast("Error al confirmar el pedido: " + err.message, "error");
     }
 }
 

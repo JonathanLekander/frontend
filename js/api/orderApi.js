@@ -5,7 +5,7 @@ export async function createOrder(data) {
         body: JSON.stringify(data)
     });
 
-    const respJson = await response.json().catch(() => null); // por si no es JSON
+    const respJson = await response.json().catch(() => null);
 
     if (!response.ok) {
         console.error("Backend error:", respJson);
@@ -22,8 +22,14 @@ export async function updateOrder(id, data) {
         body: JSON.stringify(data)
     });
 
-    if (!response.ok) throw new Error('Error actualizando orden');
-    return response.json();
+    const respJson = await response.json().catch(() => null);
+
+    if (!response.ok) {
+        console.error("Backend error:", respJson);
+        throw new Error(respJson?.message || 'Error actualizando orden');
+    }
+
+    return respJson;
 }
 
 export async function getOrders() {

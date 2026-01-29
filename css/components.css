@@ -1,0 +1,318 @@
+/* Header */
+header {
+    background-color: var(--color-cream);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--color-terracotta);
+    margin-bottom: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Links */
+nav a {
+    color: var(--color-brown);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+nav a[href="home.html"]:hover,
+nav a[href="menu.html"]:hover,
+nav a[href="panel-control.html"]:hover,
+nav a[href="comanda.html"]:hover {
+    background-color: var(--color-terracotta);
+    color: var(--color-beige);
+    border-radius: 25px;
+    transform: translateY(-1px);
+}
+
+/* Logo */
+.logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-terracotta);
+}
+
+.logo-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Search box */
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 40px;
+    border: 1px solid var(--color-terracotta);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: var(--color-dark-brown);
+}
+
+/* Cards */
+.comanda-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--color-terracotta);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.comanda-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.dish-card {
+    border: 1px solid var(--color-terracotta);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.dish-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Headers */
+.comanda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.comanda-number {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-dark-brown);
+}
+
+/* Status */
+.comanda-status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.status-1 { background: var(--color-status-pending-bg); color: var(--color-status-pending-text); }
+.status-2 { background: var(--color-status-inprogress-bg); color: var(--color-status-inprogress-text); }
+.status-3 { background: var(--color-status-ready-bg); color: var(--color-status-ready-text); }
+.status-4 { background: var(--color-status-delivery-bg); color: var(--color-status-delivery-text); }
+.status-5 { background: var(--color-status-closed-bg); color: var(--color-status-closed-text); }
+
+/* Info items */
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    margin-bottom: 0.2rem;
+}
+
+.info-value {
+    font-weight: bold;
+    color: var(--color-brown);
+}
+
+/* Modals */
+.modal,
+.modal-detalles,
+.modal-carrito {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    padding: 1rem;
+}
+
+.modal-content,
+.detalles-content,
+.carrito-content {
+    background-color: var(--color-white);
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#modal-comanda .modal-content {
+    margin: 1rem auto; 
+    padding: 1.5rem;
+}
+
+.modal-content {
+    width: 95%;
+    max-width: 800px;
+}
+
+.detalles-content {
+    width: 95%;
+    max-width: 500px;
+}
+
+.carrito-content {
+    max-width: 500px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-gray);
+}
+
+.close-btn:hover {
+    color: var(--color-dark-gray);
+}
+
+/* Buttons */
+.btn-principal,
+.boton-principal {
+    padding: 1rem 2rem;
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-secundario,
+.boton-secundario {
+    padding: 1rem 2rem;
+    background: var(--color-cream);
+    color: var(--color-brown);
+    border: 2px solid var(--color-terracotta);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-principal:hover,
+.boton-principal:hover {
+    background: var(--color-dark-terracotta);
+}
+
+.btn-secundario:hover,
+.boton-secundario:hover {
+    background: var(--color-light-terracotta);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
+    z-index: 1001;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+    border: 1px solid var(--color-dark-terracotta);
+    font-weight: 500;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.error {
+    background: var(--color-toast-error-bg);
+    color: var(--color-toast-error-text);
+    border: 1px solid var(--color-toast-error-border);
+}
+
+.toast.warning {
+    background: var(--color-toast-warning-bg);
+    color: var(--color-toast-warning-text);
+    border: 1px solid var(--color-toast-warning-border);
+}
+
+.toast.success {
+    background: var(--color-toast-success-bg);
+    color: var(--color-toast-success-text);
+    border: 1px solid var(--color-toast-success-border);
+}
+
+/* Loading/Error states */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-gray);
+    font-style: italic;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--color-gray);
+}
+
+.empty-state h3 {
+    margin-bottom: 1rem;
+    color: var(--color-dark-gray);
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    padding: 2rem;
+}
+
+.carrito-vacio {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-gray);
+    font-style: italic;
+}

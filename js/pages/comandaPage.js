@@ -57,13 +57,22 @@ export class ComandaPage {
     }
 
     buscarComanda() {
-        const numero = document.getElementById('search-comanda').value.trim();
-        if (!numero) return this.mostrarComandas(this.comandas);
+        const input = document.getElementById('search-comanda').value;
 
-        const encontradas = this.comandas.filter(c => c.orderNumber.toString() === numero);
+        if (!input) {
+            this.mostrarComandas(this.comandas);
+            return;
+        }
+
+        const query = input.trim().toLowerCase();
+
+        const encontradas = this.comandas.filter(c =>
+            c.orderNumber.toString().includes(query)
+        );
+
         this.mostrarComandas(encontradas);
     }
- 
+
     
     mostrarComandas(lista) {
         const contenedor = document.getElementById('lista-comandas');

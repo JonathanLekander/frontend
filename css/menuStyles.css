@@ -109,8 +109,8 @@ nav a[onclick="toggleCarrito()"]:hover {
     margin-left: auto;
     height: 46px;             
     padding: 0 18px;
-    background-color: #e74c3c;
-    color: white;
+    background-color: var(--color-red);
+    color: var(--color-white);
     font-size: 0.8rem;
     border: none;
     border-radius: 25px;       
@@ -125,7 +125,7 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 #btnSalirComanda:hover {
-    background-color: #c0392b;
+    background-color: var(--color-red);
 }
 .filters-btn {
     padding: 0.8rem 1.5rem;

@@ -192,8 +192,6 @@ export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
     }
 }
 
-// ================= FUNCIONES PARA PANEL DE CONTROL =================
-
 export function renderComandasControlPanel(comandasLista) {
     return comandasLista.map(comanda => {
         const fechaFormateada = formatearFecha(comanda.createdAt);
@@ -278,7 +276,6 @@ export function renderComandasControlPanel(comandasLista) {
         `;
     }).join('');
 }
-
 
 
 export function renderModalEstado(itemData) {

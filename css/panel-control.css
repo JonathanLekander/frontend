@@ -29,7 +29,7 @@ nav ul li:nth-child(2) strong {
 }
 
 .comanda-card {
-    background: #fff;
+    background: var(--color-white);
     border-radius: 16px;
     padding: 16px;
     display: flex;
@@ -45,7 +45,6 @@ nav ul li:nth-child(2) strong {
     align-items: start;
 }
 
-/* Estado colapsado: solo 2 items */
 .comanda-card:not(.expandida) .item-control:nth-child(n+3) {
     display: none;
 }
@@ -116,19 +115,16 @@ nav ul li:nth-child(2) strong {
     padding: 10px 16px;
     width: 100%;
     border-radius: 10px;
-    background: #f3eee9;
-    border: 1px solid #e0d5c8;
+    background: var(--color-beige);
+    border: 1px solid var(--color-cream);
     font-weight: 600;
     cursor: pointer;
-    color: inherit; /* 🔑 evita colores raros */
+    color: inherit; 
 }
 
 .btn-ver-mas:hover {
-    background: #e9e1d8;
+    background: var(--color-cream);
 }
-
-
-
 
 .comanda-items h4 {
     margin-bottom: 0.5rem;
@@ -136,7 +132,7 @@ nav ul li:nth-child(2) strong {
     color: var(--color-brown);
 }
 .comanda-card.expandida .comanda-items {
-    max-height: 2000px; /* suficientemente grande */
+    max-height: 2000px;
 }
 
 

@@ -287,9 +287,9 @@ async function confirmarPedido() {
                 "success"
             );
         } else {
-            await createOrder(ordenBase);
-            mostrarToast("Nueva comanda creada", "success");
-        }
+        const nuevaComanda = await createOrder(ordenBase);
+        mostrarToast(`Nueva comanda #${nuevaComanda.orderNumber} creada`, "success");
+    }
 
         clear();
         renderCarrito(getItems());

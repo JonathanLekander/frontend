@@ -1,4 +1,3 @@
-
 nav ul {
     list-style: none;
     display: flex;
@@ -597,8 +596,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: var(--color-terracotta);
-    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);
@@ -615,21 +612,21 @@ nav a[onclick="toggleCarrito()"]:hover {
 }
 
 .toast.error {
-    background: var(--color-toast-error-bg);
-    color: var(--color-toast-error-text);
-    border: 1px solid var(--color-toast-error-border);
+    background: var(--color-toast-error-bg) !important;
+    color: var(--color-toast-error-text) !important;
+    border: 1px solid var(--color-toast-error-border) !important;
 }
 
 .toast.warning {
-    background: var(--color-toast-warning-bg);
-    color: var(--color-toast-warning-text);
-    border: 1px solid var(--color-toast-warning-border);
+    background: var(--color-toast-warning-bg) !important;
+    color: var(--color-toast-warning-text) !important;
+    border: 1px solid var(--color-toast-warning-border) !important;
 }
 
 .toast.success {
-    background: var(--color-toast-success-bg);
-    color: var(--color-toast-success-text);
-    border: 1px solid var(--color-toast-success-border);
+    background: var(--color-toast-success-bg) !important;
+    color: var(--color-toast-success-text) !important;
+    border: 1px solid var(--color-toast-success-border) !important;
 }
 
 .btn-salir-comanda {
@@ -707,7 +704,6 @@ nav a[onclick="toggleCarrito()"]:hover {
     flex-grow: 1;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }

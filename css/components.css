@@ -239,8 +239,6 @@ nav a[href="comanda.html"]:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: var(--color-terracotta);
-    color: var(--color-white);
     padding: 1rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.3);

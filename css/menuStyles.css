@@ -170,6 +170,13 @@ nav a[onclick="toggleCarrito()"]:hover {
     display: flex;
 }
 
+.filters-dropdown.active .filters-btn {
+    background-color: var(--color-terracotta);
+    color: var(--color-beige);
+    border-color: var(--color-terracotta);
+}
+
+
 .filter-options button {
     padding: 0.5rem 1rem;
     border: 1px solid var(--color-terracotta); 

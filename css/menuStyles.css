@@ -13,13 +13,13 @@ nav a {
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 1rem;
+    transition: none !important;
 }
 
 nav a[href="home.html"]:hover {
     background-color: var(--color-terracotta); 
     color: var(--color-beige);
-    transform: scale(1.05);
     border-radius: 25px;
 }
 
@@ -34,11 +34,16 @@ nav a[href="home.html"]:hover {
     line-height: 1;
 }
 
+.nav-inicio:hover,
+.btn-carrito:hover {
+    border-radius: 25px !important;
+}
+
 .controls-container {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 2rem 0.5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -46,7 +51,6 @@ nav a[href="home.html"]:hover {
 nav a[onclick="toggleCarrito()"]:hover {
     background-color: var(--color-terracotta); 
     color: var(--color-beige);
-    transform: scale(1.05);
     border-radius: 25px;
 }
 
@@ -102,6 +106,13 @@ nav a[onclick="toggleCarrito()"]:hover {
     min-width: 200px;
     box-shadow: 0 4px 12px rgba(201, 136, 102, 0.2);
     z-index: 1000;
+}
+
+.btn-carrito {
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
 }
 
 
@@ -495,7 +506,6 @@ nav a[onclick="toggleCarrito()"]:hover {
 .btn-carrito:hover {
     background-color: var(--color-terracotta);
     color: var(--color-beige);
-    transform: scale(1.05);
     border-radius: 25px;
 }
 

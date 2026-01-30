@@ -1,8 +1,8 @@
 .comandas-container h1 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     color: var(--color-dark-brown);
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .comandas-controls {
@@ -237,6 +237,8 @@
     color: var(--color-dark-gray);
 }
 
+
+
 .comanda-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -421,4 +423,11 @@ nav a i {
     font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
+}
+
+header {
+    padding: 1rem 2rem !important;
+    background-color: var(--color-cream) !important;
+    border-bottom: 2px solid var(--color-terracotta) !important;
+    margin-bottom: 1rem !important;
 }

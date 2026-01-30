@@ -15,24 +15,37 @@ export class PanelControlPage {
     }
 
     setupEventListeners() {
-       
         const searchInput = document.getElementById('search-comanda');
         if (searchInput) {
             searchInput.addEventListener('input', () => this.filtrarComandas());
         }
 
         document.addEventListener('click', (e) => {
+
             if (e.target.classList.contains('btn-cambiar-estado')) {
-                const orderNumber = parseInt(e.target.dataset.orderNumber);
-                const itemId = parseInt(e.target.dataset.itemId);
+                const orderNumber = Number(e.target.dataset.orderNumber);
+                const itemId = Number(e.target.dataset.itemId);
+
                 const comanda = this.comandas.find(c => c.orderNumber === orderNumber);
-                
-                if (comanda && comanda.items) {
-                    const item = comanda.items.find(i => i.id === itemId);
-                    if (item) {
-                        this.abrirModalEstado(comanda, item);
-                    }
-                }
+                if (!comanda) return;
+
+                const item = comanda.items?.find(i => i.id === itemId);
+                if (!item) return;
+
+                this.abrirModalEstado(comanda, item);
+            }
+
+            if (e.target.classList.contains('btn-ver-mas')) {
+                const card = e.target.closest('.comanda-card');
+                if (!card) return;
+
+                card.classList.toggle('expandida');
+
+                const ocultos = card.querySelectorAll('.item-control').length - 2;
+
+                e.target.textContent = card.classList.contains('expandida')
+                    ? 'Ver menos'
+                    : `Ver más (${ocultos})`;
             }
 
             if (e.target.id === 'btn-cancelar-estado') {
@@ -49,11 +62,13 @@ export class PanelControlPage {
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('modal-estado').style.display === 'block') {
+            const modal = document.getElementById('modal-estado');
+            if (e.key === 'Escape' && modal?.style.display === 'block') {
                 this.cerrarModalEstado();
             }
         });
     }
+
 
     async cargarComandas() {
         try {

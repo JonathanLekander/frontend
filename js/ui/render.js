@@ -129,7 +129,7 @@ export function renderComandas(comandas, onVerDetalles) {
     `).join('');
 }
 
-function formatearFecha(fecha) {
+export function formatearFecha(fecha) {
     if (!fecha) return 'Fecha no disponible';
     
     const f = new Date(fecha);
@@ -197,70 +197,89 @@ export function renderDetallesComanda(comanda, obtenerPrecioUnitario) {
 export function renderComandasControlPanel(comandasLista) {
     return comandasLista.map(comanda => {
         const fechaFormateada = formatearFecha(comanda.createdAt);
-        const notasHTML = comanda.notes ? 
-            `<div class="info-item">
-                <span class="info-label">Notas:</span>
-                <span>${comanda.notes}</span>
-            </div>` : '';
+        const itemsCount = comanda.items?.length || 0;
 
-        const itemsHTML = comanda.items ? comanda.items.map(item => {
-            const notasItem = item.notes ? 
-                `<div class="item-notes">Notas: ${item.notes}</div>` : '';
-            
+        const itemsHTML = (comanda.items || []).map(item => {
+            const precio =
+                item.price ??
+                item.unitPrice ??
+                item.subtotal ??
+                item.dish?.price ??
+                null;
+
             return `
                 <div class="item-control">
                     <div class="item-imagen">
-                        <img src="${item.dish?.image || 'https://via.placeholder.com/50x50/2c5530/ffffff?text=Plato'}" 
-                             alt="${item.dish?.name || 'Plato'}"
-                             onerror="this.src='https://via.placeholder.com/50x50/2c5530/ffffff?text=Plato'">
+                        <img src="${item.dish?.image || 'https://via.placeholder.com/50x50'}">
                     </div>
+
                     <div class="item-info">
-                        <div class="item-name">${item.dish?.name || 'Plato'} x${item.quantity || 1}</div>
-                        <div class="item-estado-actual">Estado: ${item.status?.name || 'Pendiente'}</div>
-                        ${notasItem}
+                        <div class="item-name">
+                            ${item.dish?.name || 'Plato'} x${item.quantity || 1}
+                        </div>
+
+                        <div class="item-detalle">
+                            <strong>Estado:</strong> ${item.status?.name || 'Pendiente'}
+                        </div>
+
+                        ${item.notes ? `
+                            <div class="item-detalle">
+                                <strong>Notas:</strong> ${item.notes}
+                            </div>
+                        ` : ''}
+
+                        ${precio !== null ? `
+                            <div class="item-detalle">
+                                <strong>Precio:</strong> $${precio}
+                            </div>
+                        ` : ''}
                     </div>
-                    <button class="btn-cambiar-estado" 
-                            data-order-number="${comanda.orderNumber}"
-                            data-item-id="${item.id}">
+
+                    <button class="btn-cambiar-estado"
+                        data-order-number="${comanda.orderNumber}"
+                        data-item-id="${item.id}">
                         Cambiar Estado
                     </button>
                 </div>
             `;
-        }).join('') : '<p>No hay items en esta comanda</p>';
+        }).join('');
+
+        const verMasHTML = itemsCount > 2 ? `
+            <button class="btn-ver-mas">
+                Ver más (${itemsCount - 2})
+            </button>
+        ` : '';
 
         return `
             <div class="comanda-card">
                 <div class="comanda-header">
-                    <span class="comanda-number">Comanda #${comanda.orderNumber}</span>
+                    <span class="comanda-number">
+                        Comanda #${comanda.orderNumber}
+                    </span>
+
                     <span class="comanda-status status-${comanda.status?.id || 1}">
                         ${comanda.status?.name || 'Pendiente'}
                     </span>
                 </div>
-                
+
                 <div class="comanda-info">
-                    <div class="info-item">
-                        <span class="info-label">Total:</span>
-                        <span>$${comanda.totalAmount || 0}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Entrega:</span>
-                        <span>${comanda.deliveryType?.name || 'No especificado'}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Fecha:</span>
-                        <span>${fechaFormateada}</span>
-                    </div>
-                    ${notasHTML}
+                    <div>Total: $${comanda.totalAmount || 0}</div>
+                    <div>Entrega: ${comanda.deliveryType?.name || 'N/A'}</div>
+                    <div>Fecha: ${fechaFormateada}</div>
+                    <div>Items: ${itemsCount}</div>
                 </div>
 
                 <div class="comanda-items">
-                    <h4>Items del Pedido:</h4>
                     ${itemsHTML}
                 </div>
+
+                ${verMasHTML}
             </div>
         `;
     }).join('');
 }
+
+
 
 export function renderModalEstado(itemData) {
     document.getElementById('modal-item-nombre').textContent = itemData.itemNombre;
@@ -274,9 +293,7 @@ export function renderModalEstado(itemData) {
     }
 }
 
-// ================= FUNCIONES AUXILIARES =================
-
-function obtenerNombreEstado(id) {
+export function obtenerNombreEstado(id) {
     const estados = {
         1: 'Pending',
         2: 'In Progress', 
@@ -284,5 +301,5 @@ function obtenerNombreEstado(id) {
         4: 'Delivery',
         5: 'Closed'
     };
-    return estados[id] || 'Desconocido';
+ return estados[id] || 'Desconocido';
 }

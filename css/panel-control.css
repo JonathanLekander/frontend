@@ -3,11 +3,6 @@ nav ul li {
     text-align: center;
 }
 
-nav ul li:nth-child(2) {
-    flex: 2;
-    text-align: center;
-}
-
 nav a[href="home.html"] {
     height: 44px;
     padding: 0 1.2rem;
@@ -15,6 +10,10 @@ nav a[href="home.html"] {
     align-items: center;
     gap: 0.5rem;
     line-height: 44px;
+}
+
+.controls-container {
+    padding: 0 2rem 1rem 2rem; 
 }
 
 nav a[href="home.html"] i {
@@ -284,4 +283,28 @@ nav ul li:nth-child(2) strong {
 .boton-agregar:disabled {
     background: var(--color-light-gray);
     cursor: not-allowed;
+}
+
+nav ul li:first-child {
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+
+nav ul li:nth-child(2) {
+    text-align: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+}
+
+nav ul li:nth-child(3) {
+    text-align: right !important;
+    justify-content: flex-end !important;
+}
+
+nav ul li:nth-child(3) .elemento-oculto {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    cursor: default !important;
+    display: inline-block !important;
 }

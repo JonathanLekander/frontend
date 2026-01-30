@@ -331,7 +331,7 @@
 }
 
 .error {
-    color: #dc3545;
+    color: var(--color-red);
     text-align: center;
     padding: 2rem;
 }
